@@ -1,0 +1,2 @@
+/*
+  Content-Security-Policy-Report-Only: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self' 'sha256-jPSEL/EwCOPPCYnuuFJ23oSoG17UXFahc3eKwLRIUSU='; style-src 'self' 'sha256-lO1IQv2xds546HHjr1hOdsS9lokkyekFul48L5+my6E='; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-src https:; form-action 'self'
