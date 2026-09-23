@@ -31,6 +31,7 @@ jobs:
           fail_action: false
           artifact_name: "zap-${{ matrix.site }}"
       - name: Send OWASP result to main Make scenario
+        if: ${{ vars.MAKE_SECURITY_ROUTE_READY == 'true' }}
         env:
           MAKE_SECURITY_WEBHOOK_URL: ${{ secrets.MAKE_SECURITY_WEBHOOK_URL }}
         shell: bash
@@ -74,6 +75,7 @@ jobs:
           path: observatory.json
           retention-days: 30
       - name: Send Observatory result to main Make scenario
+        if: ${{ vars.MAKE_SECURITY_ROUTE_READY == 'true' }}
         env:
           MAKE_SECURITY_WEBHOOK_URL: ${{ secrets.MAKE_SECURITY_WEBHOOK_URL }}
         shell: bash
