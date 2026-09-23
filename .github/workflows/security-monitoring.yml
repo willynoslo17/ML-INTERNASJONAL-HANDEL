@@ -104,8 +104,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          curl --location --silent --show-error --max-time 30 \\
-            --dump-header headers.txt --output /dev/null \\
+          curl --location --silent --show-error --max-time 30 \
+            --dump-header headers.txt --output /dev/null \
             --write-out '%{http_code}' "${{ matrix.url }}" > status.txt
           python - <<'PY'
           import json
@@ -113,7 +113,7 @@ jobs:
           from pathlib import Path
 
           raw = Path("headers.txt").read_text(errors="replace").strip()
-          final = re.split(r"\\r?\\n\\r?\\n", raw)[-1]
+          final = re.split(r"\r?\n\r?\n", raw)[-1]
           headers = {}
           for line in final.splitlines():
               if ":" in line:
@@ -133,9 +133,9 @@ jobs:
           report = {"site": "${{ matrix.site }}", "url": "${{ matrix.url }}", "http_status": status, "cloudflare_detected": bool(headers.get("cf-ray") or headers.get("server", "").lower() == "cloudflare"), "grade": grade, "score": round(100 * passed / len(checks)), "checks": checks, "missing": [name for name, ok in checks.items() if not ok]}
           Path("headers-report.json").write_text(json.dumps(report, indent=2))
           with open("${{ github.step_summary }}", "a") as out:
-              out.write("## HTTP security headers: " + report["site"] + "\\n\\n")
-              out.write("HTTP " + str(status) + " | Presence score " + str(report["score"]) + "/100 | Grade " + grade + "\\n\\n")
-              out.write("Missing: " + (", ".join(report["missing"]) or "none") + "\\n")
+              out.write("## HTTP security headers: " + report["site"] + "\n\n")
+              out.write("HTTP " + str(status) + " | Presence score " + str(report["score"]) + "/100 | Grade " + grade + "\n\n")
+              out.write("Missing: " + (", ".join(report["missing"]) or "none") + "\n")
           PY
       - name: Upload header report
         uses: actions/upload-artifact@v4
@@ -152,6 +152,6 @@ jobs:
           set -euo pipefail
           run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           jq --arg run_url "$run_url" '{event:"security.scan",site:.site,source:"HTTP security headers",grade:.grade,score:.score,report_url:$run_url,run_url:$run_url,http_status:.http_status,missing:.missing,cloudflare_detected:.cloudflare_detected}' headers-report.json > payload.json
-          curl --fail-with-body --retry 3 --max-time 30 --silent --show-error \\
-            --header "Content-Type: application/json" \\
+          curl --fail-with-body --retry 3 --max-time 30 --silent --show-error \
+            --header "Content-Type: application/json" \
             --data-binary @payload.json "$MAKE_SECURITY_WEBHOOK_URL" > /dev/null
