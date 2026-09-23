@@ -1,0 +1,63 @@
+name: Security monitoring
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 4 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  zap-baseline:
+    name: "OWASP ZAP - ${{ matrix.site }}"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - site: mlinternasjonal
+            url: https://mlinternasjonal.no
+          - site: willymartinez
+            url: https://willymartinez.no
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Run passive OWASP ZAP baseline
+        uses: zaproxy/action-baseline@v0.15.0
+        with:
+          target: ${{ matrix.url }}
+          allow_issue_writing: false
+          fail_action: false
+          artifact_name: "zap-${{ matrix.site }}"
+
+  mozilla-observatory:
+    name: "Mozilla Observatory - ${{ matrix.site }}"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - site: mlinternasjonal
+            host: mlinternasjonal.no
+          - site: willymartinez
+            host: willymartinez.no
+    steps:
+      - name: Run Mozilla Observatory scan
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail-with-body --retry 3 --request POST             "https://observatory-api.mdn.mozilla.net/api/v2/scan?host=${{ matrix.host }}"             --output observatory.json
+          {
+            echo "## Mozilla Observatory: ${{ matrix.host }}"
+            echo
+            jq -r '"Grade: **\(.grade)**  |  Score: **\(.score)**  |  Passed: **\(.tests_passed)**  |  Failed: **\(.tests_failed)**"' observatory.json
+            echo
+            jq -r '"[Open full report](\(.details_url))"' observatory.json
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload Observatory result
+        uses: actions/upload-artifact@v4
+        with:
+          name: "mozilla-observatory-${{ matrix.site }}"
+          path: observatory.json
+          retention-days: 30
