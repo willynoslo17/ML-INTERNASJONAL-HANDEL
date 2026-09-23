@@ -30,6 +30,18 @@ jobs:
           allow_issue_writing: false
           fail_action: false
           artifact_name: "zap-${{ matrix.site }}"
+      - name: Send OWASP result to main Make scenario
+        env:
+          MAKE_SECURITY_WEBHOOK_URL: ${{ secrets.MAKE_SECURITY_WEBHOOK_URL }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          jq -n --arg site "${{ matrix.site }}" --arg url "${{ matrix.url }}" --arg run_url "$run_url" \
+            '{event:"security.scan",site:$site,source:"OWASP ZAP",grade:"baseline",score:"",report_url:$run_url,run_url:$run_url,target_url:$url}' > payload.json
+          curl --fail-with-body --retry 3 --max-time 30 --silent --show-error \
+            --header "Content-Type: application/json" \
+            --data-binary @payload.json "$MAKE_SECURITY_WEBHOOK_URL" > /dev/null
 
   mozilla-observatory:
     name: "Mozilla Observatory - ${{ matrix.site }}"
@@ -61,3 +73,15 @@ jobs:
           name: "mozilla-observatory-${{ matrix.site }}"
           path: observatory.json
           retention-days: 30
+      - name: Send Observatory result to main Make scenario
+        env:
+          MAKE_SECURITY_WEBHOOK_URL: ${{ secrets.MAKE_SECURITY_WEBHOOK_URL }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          jq --arg site "${{ matrix.host }}" --arg run_url "$run_url" \
+            '{event:"security.scan",site:$site,source:"Mozilla Observatory",grade:(.grade // "unknown"),score:(.score // ""),report_url:(.details_url // $run_url),run_url:$run_url}' observatory.json > payload.json
+          curl --fail-with-body --retry 3 --max-time 30 --silent --show-error \
+            --header "Content-Type: application/json" \
+            --data-binary @payload.json "$MAKE_SECURITY_WEBHOOK_URL" > /dev/null
