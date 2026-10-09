@@ -7,8 +7,8 @@ name: Deploy Cloudflare Pages
 #   npx wrangler pages deploy . --project-name ml-internasjonal-handel --branch main
 
 on:
-  push:
-    branches: [main]
+  # Push-to-main can be added after CLOUDFLARE_API_TOKEN and
+  # CLOUDFLARE_ACCOUNT_ID are set; until then use workflow_dispatch.
   workflow_dispatch:
 
 jobs:
