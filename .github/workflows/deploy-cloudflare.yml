@@ -32,6 +32,7 @@ jobs:
             --exclude dist \
             --exclude functions \
             --exclude "README*" \
+            --exclude AGENTS.md \
             ./ dist/
       - name: Deploy to Pages project ml-internasjonal-handel
         if: env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
