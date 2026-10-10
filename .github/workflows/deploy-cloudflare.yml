@@ -22,10 +22,17 @@ jobs:
         run: echo "::warning::Add CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID repo secrets to enable auto-deploy."
       - uses: actions/checkout@v4
         if: env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
-      - name: Build dist/ (site files only)
+      - name: Build dist/ (static site files only; functions/ stays at project root)
         if: env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
         run: |
-          mkdir -p dist && rsync -a --exclude .git --exclude .github --exclude dist --exclude "README*" ./ dist/
+          mkdir -p dist
+          rsync -a \
+            --exclude .git \
+            --exclude .github \
+            --exclude dist \
+            --exclude functions \
+            --exclude "README*" \
+            ./ dist/
       - name: Deploy to Pages project ml-internasjonal-handel
         if: env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
         uses: cloudflare/wrangler-action@v3
@@ -34,4 +41,5 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           wranglerVersion: "4"
           workingDirectory: .
+          # Pages Functions in ./functions are picked up from cwd; MAKE_WEBHOOK_URL must be set as a Pages secret.
           command: pages deploy dist --project-name ml-internasjonal-handel --branch main --commit-dirty=true
