@@ -112,7 +112,39 @@ nav {
   background: var(--gold);
   color: #071018;
 }
+.btn.whatsapp {
+  border-color: #25d366;
+  background: #25d366;
+  color: #071018;
+}
 .btn:hover { opacity: 0.92; }
+.contactbox .btn.whatsapp {
+  display: inline-block;
+  margin: 14px 0 0;
+  color: #071018;
+}
+.footer-grid .btn.whatsapp {
+  display: inline-block;
+  margin-top: 12px;
+  color: #071018;
+}
+.wa-float {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 35;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+.wa-float:hover { opacity: 0.92; }
+.wa-float svg { width: 26px; height: 26px; fill: currentColor; }
 
 .orb {
   aspect-ratio: 1;
