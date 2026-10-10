@@ -76,24 +76,28 @@ export async function onRequestPost(context) {
       );
     }
 
-    const webhookUrl = context.env.MAKE_WEBHOOK_URL;
-    if (!webhookUrl) {
-      return json(
-        { ok: false, error: "webhook_not_configured", contactEmail: CONTACT_EMAIL },
-        500,
-        headers
-      );
-    }
+    const interest = String(body.interest || "").trim();
 
     const payload = {
       source: "mlinternasjonal.no",
       name,
       email,
       company,
+      interest,
       message,
       lang,
       submittedAt: new Date().toISOString(),
     };
+
+    const webhookUrl = context.env.MAKE_WEBHOOK_URL;
+    if (!webhookUrl) {
+      // No webhook configured: surface the contact email to the client (still HTTP 200).
+      return json(
+        { ok: false, error: "webhook_not_configured", contactEmail: CONTACT_EMAIL },
+        200,
+        headers
+      );
+    }
 
     const upstream = await fetch(webhookUrl, {
       method: "POST",

@@ -61,6 +61,7 @@
         name: form.name.value.trim(),
         email: form.email.value.trim(),
         company: form.company ? form.company.value.trim() : "",
+        interest: form.interest ? form.interest.value.trim() : "",
         message: form.message.value.trim(),
         website: form.website ? form.website.value.trim() : "",
         lang: lang,
