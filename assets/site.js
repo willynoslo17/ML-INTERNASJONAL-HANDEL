@@ -1,11 +1,29 @@
 (function () {
-  const CONTACT_EMAIL = "willynoslo17@gmail.com";
+  const cfg = window.ML_SITE || {};
+  const CONTACT_EMAIL = cfg.email || "willynoslo17@gmail.com";
   // Permanent: WhatsApp only — never add tel: or phone numbers on this site.
-  const WHATSAPP_URL = "https://wa.me/4792211752";
+  const WHATSAPP_URL = cfg.whatsappUrl || "https://wa.me/4792211752";
   const COOKIE_KEY = "ml-cookie-consent";
 
   function qs(sel, root) {
     return (root || document).querySelector(sel);
+  }
+
+  function qsa(sel, root) {
+    return Array.prototype.slice.call((root || document).querySelectorAll(sel));
+  }
+
+  /** Keep mailto / WhatsApp hrefs aligned with site-config.js */
+  function applyContactFromConfig() {
+    qsa('a[href^="mailto:"]').forEach(function (a) {
+      a.href = "mailto:" + CONTACT_EMAIL;
+      if (a.textContent && a.textContent.indexOf("@") !== -1) {
+        a.textContent = CONTACT_EMAIL;
+      }
+    });
+    qsa('a[href*="wa.me"]').forEach(function (a) {
+      a.href = WHATSAPP_URL;
+    });
   }
 
   function initCookieBanner() {
@@ -101,7 +119,10 @@
   }
 
   function initWhatsAppFloat() {
-    if (qs(".wa-float")) return;
+    if (qs(".wa-float")) {
+      qs(".wa-float").href = WHATSAPP_URL;
+      return;
+    }
     const a = document.createElement("a");
     a.className = "wa-float";
     a.href = WHATSAPP_URL;
@@ -114,6 +135,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+    applyContactFromConfig();
     initCookieBanner();
     initContactForm();
     initWhatsAppFloat();
