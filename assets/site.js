@@ -1,11 +1,20 @@
 (function () {
-  const CONTACT_EMAIL = "willynoslo17@gmail.com";
+  const cfg = window.SITE_CONFIG || {};
+  const CONTACT_EMAIL = cfg.email || "willynoslo17@gmail.com";
   // Permanent: WhatsApp only — never add tel: or phone numbers on this site.
-  const WHATSAPP_URL = "https://wa.me/4792211752";
+  const WHATSAPP_URL =
+    (cfg.whatsapp && cfg.whatsapp.url) || "https://wa.me/4792211752";
   const COOKIE_KEY = "ml-cookie-consent";
 
   function qs(sel, root) {
     return (root || document).querySelector(sel);
+  }
+
+  function confirmedSocials() {
+    const list = cfg.socials || [];
+    return list.filter(function (s) {
+      return s && typeof s.url === "string" && s.url.indexOf("http") === 0;
+    });
   }
 
   function initCookieBanner() {
@@ -113,9 +122,17 @@
     document.body.appendChild(a);
   }
 
+  /** Sync any [data-whatsapp-href] anchors to config WhatsApp URL. */
+  function syncWhatsAppLinks() {
+    document.querySelectorAll("[data-whatsapp-href], a.btn.whatsapp, a.wa-float").forEach(function (el) {
+      if (el.tagName === "A") el.setAttribute("href", WHATSAPP_URL);
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initCookieBanner();
     initContactForm();
+    syncWhatsAppLinks();
     initWhatsAppFloat();
   });
 })();
