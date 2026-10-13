@@ -363,7 +363,7 @@ footer {
 }
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
   gap: 28px;
 }
 .footer-grid strong {
@@ -378,6 +378,30 @@ footer {
   color: var(--muted);
 }
 .footer-grid a:hover { color: var(--gold); }
+.footer-grid a.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+}
+.footer-grid a.social-link svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+.trust-person {
+  margin-top: 18px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.trust-person a {
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.trust-person a:hover { color: var(--gold); }
+.legal-block .trust-person { margin-top: 14px; }
 .footer-legal {
   margin-top: 28px;
   padding-top: 20px;
