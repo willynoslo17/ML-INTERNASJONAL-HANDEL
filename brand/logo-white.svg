@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="563" height="104" viewBox="48 148 563 104">
+  <g>
+    
+  <circle cx="100" cy="200" r="40" fill="none" stroke="#FFFFFF" stroke-width="8"/>
+  <path d="M60 200 h80 M100 160 v80" stroke="#FFFFFF" stroke-width="6" fill="none"/>
+  <circle cx="130" cy="170" r="8" fill="#FFFFFF"/>
+
+    <text x="180" y="209" font-family="Inter" font-size="36" font-weight="600" fill="#FFFFFF" dominant-baseline="middle">ML Internasjonal Handel</text>
+  </g>
+</svg>
