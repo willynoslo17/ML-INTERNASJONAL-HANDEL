@@ -1,4 +1,5 @@
 (function () {
+  document.documentElement.classList.add("js");
   const CONTACT_EMAIL = "info@mlinternasjonal.no";
   // Permanent: WhatsApp only — never add tel: or phone numbers on this site.
   const WHATSAPP_URL = "https://wa.me/4792211752";
@@ -50,6 +51,10 @@
 
     form.addEventListener("submit", async function (e) {
       e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
       const lang = document.documentElement.lang || "no";
       const t = messages[lang] || messages.no;
 
@@ -100,6 +105,65 @@
     });
   }
 
+  function initHeader() {
+    const header = qs(".site-header");
+    if (!header) return;
+    const toggle = qs(".nav-toggle", header);
+    const nav = qs("#site-nav", header);
+
+    function onScroll() {
+      header.classList.toggle("is-stuck", window.scrollY > 8);
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    function closeNav() {
+      header.classList.remove("is-open");
+      if (toggle) toggle.setAttribute("aria-expanded", "false");
+    }
+    function openNav() {
+      header.classList.add("is-open");
+      if (toggle) toggle.setAttribute("aria-expanded", "true");
+    }
+
+    if (toggle && nav) {
+      toggle.addEventListener("click", function () {
+        if (header.classList.contains("is-open")) closeNav();
+        else openNav();
+      });
+      nav.addEventListener("click", function (e) {
+        if (e.target.closest("a")) closeNav();
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeNav();
+      });
+      window.addEventListener("resize", function () {
+        if (window.innerWidth > 899) closeNav();
+      });
+    }
+  }
+
+  function initReveal() {
+    const nodes = document.querySelectorAll("[data-reveal]");
+    if (!nodes.length) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      nodes.forEach(function (node) { node.classList.add("is-in"); });
+      return;
+    }
+    if (!("IntersectionObserver" in window)) {
+      nodes.forEach(function (node) { node.classList.add("is-in"); });
+      return;
+    }
+    const io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-in");
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.16, rootMargin: "0px 0px -8% 0px" });
+    nodes.forEach(function (node) { io.observe(node); });
+  }
+
   function initWhatsAppFloat() {
     if (qs(".wa-float")) return;
     const a = document.createElement("a");
@@ -114,6 +178,8 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+    initHeader();
+    initReveal();
     initCookieBanner();
     initContactForm();
     initWhatsAppFloat();
