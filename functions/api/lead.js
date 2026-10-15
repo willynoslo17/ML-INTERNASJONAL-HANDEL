@@ -3,7 +3,7 @@
  * Forwards contact form submissions to Make via MAKE_WEBHOOK_URL.
  * Set the secret in Cloudflare Pages: MAKE_WEBHOOK_URL
  */
-const CONTACT_EMAIL = "willynoslo17@gmail.com";
+const CONTACT_EMAIL = "info@mlinternasjonal.no";
 
 function json(data, status = 200, extraHeaders = {}) {
   return new Response(JSON.stringify(data), {

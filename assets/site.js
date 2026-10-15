@@ -1,6 +1,6 @@
 (function () {
   document.documentElement.classList.add("js");
-  const CONTACT_EMAIL = "willynoslo17@gmail.com";
+  const CONTACT_EMAIL = "info@mlinternasjonal.no";
   // Permanent: WhatsApp only — never add tel: or phone numbers on this site.
   const WHATSAPP_URL = "https://wa.me/4792211752";
   const COOKIE_KEY = "ml-cookie-consent";
