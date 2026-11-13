@@ -172,6 +172,9 @@
       });
     }, { threshold: 0.16, rootMargin: "0px 0px -8% 0px" });
     nodes.forEach(function (node) { io.observe(node); });
+    setTimeout(function () {
+      nodes.forEach(function (node) { node.classList.add("is-in"); });
+    }, 700);
   }
 
   function initWhatsAppFloat() {
