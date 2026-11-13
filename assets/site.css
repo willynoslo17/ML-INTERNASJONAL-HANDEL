@@ -395,37 +395,6 @@ footer .btn.whatsapp:hover { color: #fff; }
 .figure-note img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; object-position: center 60%; }
 .figure-note figcaption { color: var(--muted); font-size: 0.88rem; padding-top: 0.65rem; }
 
-.stores {
-  list-style: none;
-  margin: 2.4rem 0 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0;
-  border-top: 1px solid var(--rule);
-  border-left: 1px solid var(--rule);
-}
-.stores a {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 11.5rem;
-  padding: 1.35rem 1.25rem 1.2rem;
-  text-decoration: none;
-  border-right: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-  background: transparent;
-  transition: background 0.25s ease;
-}
-.stores a:hover { background: #fff; color: inherit; }
-.stores .kicker {
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--gold-ink);
-}
-.stores h3 { margin: 1.1rem 0 0.25rem; font-size: 1.85rem; }
-.stores p { margin: 0; color: var(--muted); font-size: 0.92rem; }
 
 .photo-scene {
   position: relative;
@@ -578,7 +547,6 @@ footer a:hover { color: var(--gold); }
 }
 
 @media (max-width: 1100px) {
-  .stores { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 899px) {
   .bar {
@@ -604,7 +572,6 @@ footer a:hover { color: var(--gold); }
   .index li:last-child { border-bottom: 0; }
   .identity { grid-template-columns: 1fr; gap: 0.15rem; }
   .identity dt { margin-top: 0.55rem; }
-  .stores { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
   .wrap { width: min(100% - 1.5rem, var(--max)); }
