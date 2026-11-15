@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HS code and tariff classification | ML Internasjonal Handel</title>
+  <meta name="description" content="The HS code determines tariffs, restrictions and obligations. An error in the heading changes the customs treatment.">
+  <meta property="og:description" content="The HS code determines tariffs, restrictions and obligations. An error in the heading changes the customs treatment.">
+  <meta name="twitter:description" content="The HS code determines tariffs, restrictions and obligations. An error in the heading changes the customs treatment.">
+  <meta name="theme-color" content="#0b1620">
+  <link rel="canonical" href="https://mlinternasjonal.no/en/blog/clasificacion-arancelaria-codigo-hs/">
+  <link rel="alternate" hreflang="no" href="https://mlinternasjonal.no/blogg/clasificacion-arancelaria-codigo-hs/">
+  <link rel="alternate" hreflang="en" href="https://mlinternasjonal.no/en/blog/clasificacion-arancelaria-codigo-hs/">
+  <link rel="alternate" hreflang="es" href="https://mlinternasjonal.no/es/blog/clasificacion-arancelaria-codigo-hs/">
+  <link rel="alternate" hreflang="x-default" href="https://mlinternasjonal.no/blogg/clasificacion-arancelaria-codigo-hs/">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:locale:alternate" content="nb_NO">
+  <meta property="og:locale:alternate" content="en_GB">
+  <meta property="og:locale:alternate" content="es_ES">
+  <meta property="og:url" content="https://mlinternasjonal.no/en/blog/clasificacion-arancelaria-codigo-hs/">
+  <meta property="og:title" content="HS code and tariff classification | ML Internasjonal Handel">
+  <meta property="og:site_name" content="ML Internasjonal Handel">
+  <meta property="og:image" content="https://mlinternasjonal.no/assets/img/blog/clasificacion-arancelaria-codigo-hs.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HS code and tariff classification | ML Internasjonal Handel">
+  <link rel="icon" href="/brand/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/brand/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the HS code?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is the code of the Harmonized System of Designation and Coding of Goods, an international system that classifies goods. Norway uses its own nomenclature based on it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the HS code determine only the tariff?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It may also determine restrictions, permit requirements, controls and other obligations. In the EU, the CBAM has linked indicators to TARIC codes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Who is responsible for the correct classification?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The owner of the goods. A customs representative may advise, but the final responsibility corresponds to the importer or exporter."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does a classification error have consequences?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. It may change the applicable tariff, activate or deactivate restrictions and generate differences in the customs treatment. No concrete rates or sanctions are invented here."
+      }
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Tariff classification and HS code: why it matters",
+  "description": "The HS code determines tariffs, restrictions and obligations. An error in the heading changes the customs treatment.",
+  "image": "https://mlinternasjonal.no/assets/img/blog/clasificacion-arancelaria-codigo-hs.jpg",
+  "inLanguage": "en",
+  "mainEntityOfPage": "https://mlinternasjonal.no/en/blog/clasificacion-arancelaria-codigo-hs/",
+  "author": {
+    "@type": "Organization",
+    "name": "ML Internasjonal Handel",
+    "legalName": "MARTINEZ LOZANO INTERNASJONAL HANDEL (ENK)",
+    "url": "https://mlinternasjonal.no/en/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ML Internasjonal Handel",
+    "legalName": "MARTINEZ LOZANO INTERNASJONAL HANDEL (ENK)",
+    "url": "https://mlinternasjonal.no/",
+    "logo": "https://mlinternasjonal.no/brand/logo-black.svg"
+  }
+}
+  </script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="site-header is-stuck">
+  <div class="bar wrap">
+    <a class="brand" href="/en/"><img src="/brand/logo-white.svg" alt="ML Internasjonal Handel" width="563" height="104"></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle-bars" aria-hidden="true"></span>
+      <span class="sr-only">Menu</span>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <a href="/en/#contact">Contact</a>
+      <a href="/en/blog/" aria-current="page">Blog</a>
+    </nav>
+    <div class="langs">
+      <a href="/blogg/clasificacion-arancelaria-codigo-hs/" hreflang="no" lang="no">NO</a>
+      <a class="active" href="/en/blog/clasificacion-arancelaria-codigo-hs/" hreflang="en" lang="en" aria-current="page">EN</a>
+      <a href="/es/blog/clasificacion-arancelaria-codigo-hs/" hreflang="es" lang="es">ES</a>
+    </div>
+  </div>
+</header>
+<main id="content" class="page blog-page blog-article" tabindex="-1">
+  <a class="back" href="/en/blog/">Back to blog</a>
+  <h1>Tariff classification and HS code: why it matters</h1>
+  <picture>
+      <source type="image/webp" srcset="/assets/img/blog/clasificacion-arancelaria-codigo-hs.webp">
+      <img class="blog-cover" src="/assets/img/blog/clasificacion-arancelaria-codigo-hs.jpg" alt="Tariff classification and HS code: why it matters" width="1280" height="720">
+    </picture>
+  <h2>Introduction</h2>
+<p>Tariff classification consists of assigning to goods the correct code of the tariff. That code, based on the Harmonized System (HS), determines to a large extent the customs treatment: tariffs, restrictions, permit requirements and other obligations. In Norway, the goods number of the Norwegian tariff fulfils that function.</p>
+<p>According to the Importguide of Tolletaten (updated on 7 August 2026), the goods number determines tariffs, restrictions and other obligations. An error in the heading may completely change the treatment of the shipment. This article explains the concept without classifying any concrete product nor inventing rates.</p>
+<h2>What is the Harmonized System (HS)</h2>
+<p>The Harmonized System is an international nomenclature maintained by the World Customs Organization. It classifies goods into chapters, headings and subheadings. Most countries, including Norway and the EU, base their national tariffs on the HS and add their own subdivisions.</p>
+<p>The HS code allows the customs of different countries to speak a common language about the nature of the goods. However, national subdivisions and explanatory notes may differ, so the correct classification must be made according to the tariff of the country of import.</p>
+<h2>The goods number in the Norwegian tariff</h2>
+<p>In Norway the goods number (varenummer) is the code that is declared. It determines the applicable tariff, whether the goods are subject to restrictions, whether they require special permits and what other formal obligations apply. The Importguide of Tolletaten underlines this function.</p>
+<p>In the European Union the TARIC code fulfils a similar role and, in addition, the CBAM mechanism has linked certain indicators to concrete TARIC codes (according to analysis by EY TradeWatch of May 2026). Although Norway does not form part of the EU customs union, companies operating in both territories must manage classifications that are coherent but adapted to each tariff.</p>
+<h2>Consequences of an error in the heading</h2>
+<p>A classification error may mean that a tariff different from the one due is applied, that a necessary restriction or permit is omitted, or that a control that did not correspond is activated. It may also affect the possibility of claiming preferential origin if the rules of origin are linked to certain headings.</p>
+<p>The responsibility for the correct classification corresponds to the owner of the goods. A customs representative may help to interpret the notes of the tariff, but does not replace the obligation of the importer to provide a precise and complete description of the goods. An incomplete product sheet or a generic description hinders the correct classification and may delay the clearance.</p>
+<p>No concrete product is classified here nor are tariff rates indicated. Any doubt about specific goods must be resolved by consulting the current Norwegian tariff and, where appropriate, Tolletaten or an authorised representative.</p>
+<h2>Disclaimer</h2>
+<p>This article is informative and of a general nature. It does not constitute customs advice nor does it classify any product. No tariff rates are invented. ML Internasjonal Handel is not a customs authority.</p>
+  <section class="blog-faq" id="faq">
+    <dl>
+    <dt>What is the HS code?</dt>
+    <dd>It is the code of the Harmonized System of Designation and Coding of Goods, an international system that classifies goods. Norway uses its own nomenclature based on it.</dd>
+    <dt>Does the HS code determine only the tariff?</dt>
+    <dd>No. It may also determine restrictions, permit requirements, controls and other obligations. In the EU, the CBAM has linked indicators to TARIC codes.</dd>
+    <dt>Who is responsible for the correct classification?</dt>
+    <dd>The owner of the goods. A customs representative may advise, but the final responsibility corresponds to the importer or exporter.</dd>
+    <dt>Does a classification error have consequences?</dt>
+    <dd>Yes. It may change the applicable tariff, activate or deactivate restrictions and generate differences in the customs treatment. No concrete rates or sanctions are invented here.</dd>
+    </dl>
+  </section>
+  <nav class="blog-links">
+    <ul>
+      <li><a href="/en/blog/documentos-importacion-exportacion-noruega/">import documents</a></li>
+      <li><a href="/en/blog/cbam-2026-que-es/">CBAM 2026</a></li>
+      <li><a href="/en/blog/datos-maestros-aduanas/">master data</a></li>
+      <li><a href="/en/#services">services</a></li>
+    </ul>
+  </nav>
+</main>
+<footer>
+  <div class="footer-grid">
+    <div>
+      <strong>MARTINEZ LOZANO INTERNASJONAL HANDEL (ENK)</strong>
+      <span>Norbygata 19, 0187 Oslo, Norway</span>
+      <span>Org. no. 935 407 095 VAT</span>
+      <a href="mailto:info@mlinternasjonal.no">info@mlinternasjonal.no</a>
+      <a class="btn whatsapp" href="https://wa.me/4792211752" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+    </div>
+    <div>
+      <strong>Pages</strong>
+      <a href="/en/#services">Services</a>
+      <a href="/en/#sectors">Sectors</a>
+      <a href="/en/#contact">Contact</a>
+      <a href="/en/blog/">Blog</a>
+    </div>
+    <div>
+      <strong>Legal</strong>
+      <a href="/en/privacy/">Privacy</a>
+      <a href="/en/cookies/">Cookies</a>
+      <a href="/en/terms/">Terms</a>
+    </div>
+  </div>
+  <div class="footer-legal">
+    <span>© 2026 MARTINEZ LOZANO INTERNASJONAL HANDEL (ENK)</span>
+    <span>mlinternasjonal.no</span>
+  </div>
+</footer>
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookies">
+  <p>We use necessary cookies for the site to work, and optional cookies for improvements if you accept. Read more in our <a href="/en/cookies/">cookie policy</a>.</p>
+  <div class="cookie-actions">
+    <button class="btn solid" type="button" data-cookie-accept>Accept</button>
+    <button class="btn" type="button" data-cookie-necessary>Necessary only</button>
+  </div>
+</div>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>
