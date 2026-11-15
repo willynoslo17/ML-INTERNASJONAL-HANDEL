@@ -215,14 +215,13 @@ body > nav a:hover { color: var(--gold); }
 .hero {
   position: relative;
   isolation: isolate;
-  min-height: 76vh;
-  min-height: 76svh;
+  min-height: 0;
   display: flex;
   align-items: flex-end;
   color: #f4f6f8;
   background: var(--ink);
   overflow: hidden;
-  padding: calc(var(--header) + 3rem) 0 clamp(3.5rem, 8vw, 6rem);
+  padding: calc(var(--header) + 3.25rem) 0 clamp(3.5rem, 8vw, 5.5rem);
 }
 .hero-media,
 .scene-media {
@@ -242,13 +241,9 @@ body > nav a:hover { color: var(--gold); }
   z-index: 1;
   pointer-events: none;
 }
-.hero::after {
-  background:
-    linear-gradient(90deg, rgba(11, 22, 32, 0.86) 0%, rgba(11, 22, 32, 0.62) 42%, rgba(11, 22, 32, 0.28) 100%),
-    linear-gradient(180deg, rgba(11, 22, 32, 0.25) 0%, rgba(11, 22, 32, 0.15) 40%, rgba(11, 22, 32, 0.55) 100%);
-}
+.hero::after,
 .photo-scene::after {
-  background: linear-gradient(105deg, rgba(11, 22, 32, 0.88) 0%, rgba(11, 22, 32, 0.62) 52%, rgba(11, 22, 32, 0.35) 100%);
+  background: none;
 }
 .hero .wrap,
 .photo-scene .wrap { position: relative; z-index: 2; }
@@ -396,6 +391,7 @@ footer .btn.whatsapp:hover { color: #fff; }
   position: relative;
   isolation: isolate;
   color: #f4f6f8;
+  background: var(--ink);
   overflow: hidden;
   padding-block: clamp(4rem, 8vw, 6.5rem);
 }

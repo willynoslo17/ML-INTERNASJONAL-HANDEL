@@ -455,6 +455,7 @@ def page_shell(lang, *, title, description, current_url, og_type, og_image, extr
             f'  <meta name="twitter:description" content="{esc_desc}">\n'
         )
     esc_title = html.escape(title, quote=True)
+    twitter_card = "summary" if og_image and "icon-512" in og_image else "summary_large_image"
     return (
         "<!doctype html>\n"
         f"<html lang=\"{L['html_lang']}\">\n"
@@ -475,7 +476,7 @@ def page_shell(lang, *, title, description, current_url, og_type, og_image, extr
         f"  <meta property=\"og:title\" content=\"{esc_title}\">\n"
         f"  <meta property=\"og:site_name\" content=\"{ORG}\">\n"
         f"  <meta property=\"og:image\" content=\"{og_image}\">\n"
-        "  <meta name=\"twitter:card\" content=\"summary_large_image\">\n"
+        f"  <meta name=\"twitter:card\" content=\"{twitter_card}\">\n"
         f"  <meta name=\"twitter:title\" content=\"{esc_title}\">\n"
         "  <link rel=\"icon\" href=\"/brand/favicon.svg\" type=\"image/svg+xml\">\n"
         "  <link rel=\"icon\" href=\"/brand/favicon-32.png\" type=\"image/png\" sizes=\"32x32\">\n"
@@ -798,7 +799,7 @@ def build_index(lang: str, arts: list) -> str:
         description="",
         current_url=url,
         og_type="website",
-        og_image=f"{SITE}/assets/img/hero.webp",
+        og_image=f"{SITE}/brand/icon-512.png",
         extra_head="",
         main=main,
     )
