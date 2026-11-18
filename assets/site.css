@@ -509,17 +509,30 @@ footer a:hover { color: var(--gold); }
 
 .social-links {
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: 0.7rem;
+  justify-content: flex-start;
+  gap: 0.75rem;
   margin-top: 1rem;
+  padding: 0;
+  max-width: 100%;
+  overflow: visible;
 }
+footer .social-links a,
 .footer-grid .social-links a,
 .social-links a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex: 0 0 40px;
+  box-sizing: border-box;
   width: 40px;
   height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  max-width: 40px;
+  max-height: 40px;
   margin: 0;
   padding: 0;
   border: 1px solid rgba(244, 246, 248, 0.22);
@@ -528,27 +541,38 @@ footer a:hover { color: var(--gold); }
   background: transparent;
   text-decoration: none;
   line-height: 0;
+  overflow: hidden;
+  aspect-ratio: 1;
+  -webkit-tap-highlight-color: transparent;
   transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
 }
-.social-links a:hover {
-  color: var(--gold);
-  border-color: var(--gold);
-  background: rgba(201, 162, 74, 0.12);
-}
+footer .social-links a:hover,
+footer .social-links a:focus-visible,
+.social-links a:hover,
 .social-links a:focus-visible {
   color: var(--gold);
   border-color: var(--gold);
   background: rgba(201, 162, 74, 0.12);
+  text-decoration: none;
+}
+.social-links a:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 3px;
 }
+footer .social-links svg,
 .social-links svg {
   width: 22px;
   height: 22px;
+  min-width: 22px;
+  min-height: 22px;
+  max-width: 22px;
+  max-height: 22px;
   fill: currentColor;
+  stroke: none;
   margin: 0;
   display: block;
-  flex-shrink: 0;
+  flex: none;
+  aspect-ratio: 1;
 }
 .footer-tagline {
   display: block;
@@ -658,6 +682,23 @@ footer > .social-links {
   .cards,
   .sectors-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 899px) {
+  footer .social-links,
+  .footer-grid .social-links,
+  .social-links {
+    justify-content: flex-start;
+    gap: 0.75rem;
+    flex-wrap: nowrap;
+  }
+  footer .social-links a,
+  .footer-grid .social-links a,
+  .social-links a {
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+  }
 }
 @media (max-width: 560px) {
   .wrap { width: min(100% - 1.5rem, var(--max)); }
