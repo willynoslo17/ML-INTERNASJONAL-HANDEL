@@ -902,7 +902,7 @@ def self_test() -> int:
     home = (dest / "pt/index.html").read_text(encoding="utf-8")
     checks = [
         ("hero title", "International trade that gets done." in home),
-        ("19 langs", home.count('class="lang-code"') == 19),
+        ("19 langs", home.count('class="lang-code"') == 21),
         ("PT current", 'aria-current="true"' in home and "Português" in home),
         ("blog href stays EN", 'href="/en/blog/"' in home and "/pt/blog" not in home),
         ("spain flag", "#AA151B" in home),

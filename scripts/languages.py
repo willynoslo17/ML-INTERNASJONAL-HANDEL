@@ -169,6 +169,20 @@ FLAG_MY = _svg(
     + _ms_star
 )
 
+FLAG_FI = _svg(
+    '<rect width="16" height="12" fill="#fff"/>'
+    '<rect x="5" width="2" height="12" fill="#002F6C"/>'
+    '<rect y="5" width="16" height="2" fill="#002F6C"/>'
+)
+
+FLAG_IS = _svg(
+    '<rect width="16" height="12" fill="#02529C"/>'
+    '<rect x="4.36" width="2.91" height="12" fill="#fff"/>'
+    '<rect y="4.5" width="16" height="3" fill="#fff"/>'
+    '<rect x="5.09" width="1.45" height="12" fill="#DC1E35"/>'
+    '<rect y="5.25" width="16" height="1.5" fill="#DC1E35"/>'
+)
+
 FLAG_PT = _svg(
     '<rect width="16" height="12" fill="#FF0000"/>'
     '<rect width="6.4" height="12" fill="#006600"/>'
@@ -196,6 +210,8 @@ LANGUAGES = [
     {"key": "de", "code": "DE", "path": "de", "hreflang": "de", "html_lang": "de", "dir": "ltr", "name": "Deutsch", "aria": "Sprache: Deutsch", "og_locale": "de_DE", "flag": FLAG_DE, "full": False},
     {"key": "nl", "code": "NL", "path": "nl", "hreflang": "nl", "html_lang": "nl", "dir": "ltr", "name": "Nederlands", "aria": "Taal: Nederlands", "og_locale": "nl_NL", "flag": FLAG_NL, "full": False},
     {"key": "sv", "code": "SV", "path": "sv", "hreflang": "sv", "html_lang": "sv", "dir": "ltr", "name": "Svenska", "aria": "Språk: Svenska", "og_locale": "sv_SE", "flag": FLAG_SV, "full": False},
+    {"key": "fi", "code": "FI", "path": "fi", "hreflang": "fi", "html_lang": "fi", "dir": "ltr", "name": "Suomi", "aria": "Language: Suomi", "og_locale": "fi_FI", "flag": FLAG_FI, "full": False},
+    {"key": "is", "code": "IS", "path": "is", "hreflang": "is", "html_lang": "is", "dir": "ltr", "name": "Íslenska", "aria": "Language: Íslenska", "og_locale": "is_IS", "flag": FLAG_IS, "full": False},
     {"key": "pt", "code": "PT", "path": "pt", "hreflang": "pt", "html_lang": "pt", "dir": "ltr", "name": "Português", "aria": "Language: Português", "og_locale": "pt_PT", "flag": FLAG_PT, "full": False},
     {"key": "fr", "code": "FR", "path": "fr", "hreflang": "fr", "html_lang": "fr", "dir": "ltr", "name": "Français", "aria": "Language: Français", "og_locale": "fr_FR", "flag": FLAG_FR, "full": False},
     {"key": "zh", "code": "ZH", "path": "zh", "hreflang": "zh-Hans", "html_lang": "zh-Hans", "dir": "ltr", "name": "简体中文", "aria": "Language: 简体中文", "og_locale": "zh_CN", "flag": FLAG_CN, "full": False},
@@ -210,7 +226,7 @@ LANGUAGES = [
 ]
 
 # New placeholder languages added in this wave (after the original eight).
-NEW_KEYS = ["pt", "fr", "zh", "zh-tw", "ja", "vi", "hi", "ko", "th", "ar", "ms"]
+NEW_KEYS = ["fi", "is", "pt", "fr", "zh", "zh-tw", "ja", "vi", "hi", "ko", "th", "ar", "ms"]
 
 # Page groups for hreflang and sitemap. Blog is intentionally absent.
 # "out" is the slug under each new language folder.

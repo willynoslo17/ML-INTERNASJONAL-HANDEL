@@ -17,7 +17,7 @@
   }
 
   function pageLang() {
-    var codes = ["zh-tw", "zh", "ja", "vi", "hi", "ko", "th", "ar", "ms", "pt", "fr", "qu", "da", "de", "nl", "sv", "es", "en", "no"];
+    var codes = ["zh-tw", "zh", "ja", "vi", "hi", "ko", "th", "ar", "ms", "pt", "fr", "fi", "is", "qu", "da", "de", "nl", "sv", "es", "en", "no"];
     var path = (location.pathname || "").toLowerCase();
     for (var i = 0; i < codes.length; i++) {
       if (path === "/" + codes[i] || path.indexOf("/" + codes[i] + "/") === 0) return codes[i];
@@ -59,6 +59,8 @@
   COOKIE_COPY.de = COOKIE_COPY.en;
   COOKIE_COPY.nl = COOKIE_COPY.en;
   COOKIE_COPY.sv = COOKIE_COPY.en;
+  COOKIE_COPY.fi = COOKIE_COPY.en;
+  COOKIE_COPY.is = COOKIE_COPY.en;
   COOKIE_COPY.pt = COOKIE_COPY.en;
   COOKIE_COPY.fr = COOKIE_COPY.en;
   COOKIE_COPY.zh = COOKIE_COPY.en;
