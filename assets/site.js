@@ -17,13 +17,16 @@
   }
 
   function pageLang() {
-    const known = ["es", "en", "no", "qu", "da", "de", "nl", "sv"];
-    const lang = (document.documentElement.lang || "").slice(0, 2);
-    if (known.indexOf(lang) !== -1) return lang;
-    const path = location.pathname || "";
-    for (var i = 0; i < known.length; i++) {
-      if (path === "/" + known[i] || path.indexOf("/" + known[i] + "/") === 0) return known[i];
+    var codes = ["zh-tw", "zh", "ja", "vi", "hi", "ko", "th", "ar", "ms", "pt", "fr", "qu", "da", "de", "nl", "sv", "es", "en", "no"];
+    var path = (location.pathname || "").toLowerCase();
+    for (var i = 0; i < codes.length; i++) {
+      if (path === "/" + codes[i] || path.indexOf("/" + codes[i] + "/") === 0) return codes[i];
     }
+    var raw = (document.documentElement.lang || "").toLowerCase().replace("_", "-");
+    if (raw.indexOf("zh-hant") === 0 || raw.indexOf("zh-tw") === 0) return "zh-tw";
+    if (raw.indexOf("zh") === 0) return "zh";
+    var short = raw.split("-")[0];
+    if (codes.indexOf(short) !== -1) return short;
     return "no";
   }
 
@@ -56,6 +59,17 @@
   COOKIE_COPY.de = COOKIE_COPY.en;
   COOKIE_COPY.nl = COOKIE_COPY.en;
   COOKIE_COPY.sv = COOKIE_COPY.en;
+  COOKIE_COPY.pt = COOKIE_COPY.en;
+  COOKIE_COPY.fr = COOKIE_COPY.en;
+  COOKIE_COPY.zh = COOKIE_COPY.en;
+  COOKIE_COPY["zh-tw"] = COOKIE_COPY.en;
+  COOKIE_COPY.ja = COOKIE_COPY.en;
+  COOKIE_COPY.vi = COOKIE_COPY.en;
+  COOKIE_COPY.hi = COOKIE_COPY.en;
+  COOKIE_COPY.ko = COOKIE_COPY.en;
+  COOKIE_COPY.th = COOKIE_COPY.en;
+  COOKIE_COPY.ar = COOKIE_COPY.en;
+  COOKIE_COPY.ms = COOKIE_COPY.en;
 
   function ensureCookieBanner() {
     let banner = qs("#cookie-banner");
@@ -132,7 +146,7 @@
         return;
       }
       const lang = document.documentElement.lang || "no";
-      const t = messages[lang] || messages.no;
+      const t = messages[pageLang()] || messages[lang] || messages.en || messages.no;
 
       if (status) {
         status.className = "form-status";

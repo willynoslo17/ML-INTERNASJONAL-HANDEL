@@ -156,12 +156,16 @@ p { margin: 0 0 1em; }
   box-shadow: 0 0 0 1px rgba(244, 246, 248, 0.28);
   overflow: hidden;
 }
+.site-header,
+.bar {
+  overflow: visible;
+}
 .lang-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  min-width: 4.1rem;
+  min-width: 5.6rem;
   min-height: 2.35rem;
   margin: 0;
   padding: 0 0.55rem;
@@ -186,14 +190,35 @@ p { margin: 0 0 1em; }
   display: none;
   position: absolute;
   top: calc(100% + 0.4rem);
-  right: 0;
+  right: auto;
+  inset-inline-end: 0;
   z-index: 40;
-  min-width: 13.5rem;
-  padding: 0.35rem;
+  min-width: 16.5rem;
+  max-width: min(20.5rem, calc(100vw - 1.2rem));
+  max-height: min(24rem, calc(100dvh - 5.25rem), calc(100vh - 5.25rem));
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(244, 246, 248, 0.42) rgba(244, 246, 248, 0.08);
+  padding: 0.35rem 0.2rem 0.35rem 0.35rem;
   background: #0f1c28;
   border: 1px solid rgba(244, 246, 248, 0.14);
   border-radius: 10px;
   box-shadow: 0 16px 40px rgba(11, 22, 32, 0.45);
+}
+.lang-menu::-webkit-scrollbar { width: 8px; }
+.lang-menu::-webkit-scrollbar-track { background: transparent; }
+.lang-menu::-webkit-scrollbar-thumb {
+  background: rgba(244, 246, 248, 0.35);
+  border-radius: 8px;
+  border: 2px solid #0f1c28;
+}
+@media (min-width: 900px) {
+  .lang-menu {
+    max-height: min(32rem, calc(100vh - 6rem), calc(100dvh - 6rem));
+  }
 }
 .langs.is-open .lang-menu,
 .lang-menu:not([hidden]) {
@@ -230,8 +255,9 @@ p { margin: 0 0 1em; }
 .lang-code {
   font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  min-width: 1.5rem;
+  letter-spacing: 0.04em;
+  min-width: 3.15rem;
+  flex-shrink: 0;
 }
 .lang-name { font-weight: 500; }
 body > nav { overflow: visible; }
