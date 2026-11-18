@@ -190,8 +190,9 @@
     const toggle = qs(".nav-toggle", header);
     const nav = qs("#site-nav", header);
 
+    const solidHeader = !document.querySelector(".hero");
     function onScroll() {
-      header.classList.toggle("is-stuck", window.scrollY > 8);
+      header.classList.toggle("is-stuck", solidHeader || window.scrollY > 8);
     }
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -311,7 +312,7 @@
 
   function initLeadTracking() {
     captureFirstTouch();
-    document.querySelectorAll("form[data-contact-form]").forEach(function (form) {
+    document.querySelectorAll("#contact-form, form[data-contact-form]").forEach(function (form) {
       fillLeadFields(form);
     });
   }
