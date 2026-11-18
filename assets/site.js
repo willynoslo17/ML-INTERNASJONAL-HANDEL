@@ -17,11 +17,13 @@
   }
 
   function pageLang() {
+    const known = ["es", "en", "no", "qu", "da", "de", "nl", "sv"];
     const lang = (document.documentElement.lang || "").slice(0, 2);
-    if (lang === "es" || lang === "en" || lang === "no") return lang;
+    if (known.indexOf(lang) !== -1) return lang;
     const path = location.pathname || "";
-    if (path.indexOf("/es/") === 0) return "es";
-    if (path.indexOf("/en/") === 0) return "en";
+    for (var i = 0; i < known.length; i++) {
+      if (path === "/" + known[i] || path.indexOf("/" + known[i] + "/") === 0) return known[i];
+    }
     return "no";
   }
 
@@ -49,10 +51,16 @@
     },
   };
 
+  COOKIE_COPY.qu = COOKIE_COPY.es;
+  COOKIE_COPY.da = COOKIE_COPY.en;
+  COOKIE_COPY.de = COOKIE_COPY.en;
+  COOKIE_COPY.nl = COOKIE_COPY.en;
+  COOKIE_COPY.sv = COOKIE_COPY.en;
+
   function ensureCookieBanner() {
     let banner = qs("#cookie-banner");
     if (banner) return banner;
-    const copy = COOKIE_COPY[pageLang()] || COOKIE_COPY.no;
+    const copy = COOKIE_COPY[pageLang()] || COOKIE_COPY.en || COOKIE_COPY.no;
     banner = document.createElement("div");
     banner.id = "cookie-banner";
     banner.className = "cookie-banner";
@@ -308,8 +316,38 @@
     });
   }
 
+
+  function initLangSwitch() {
+    document.querySelectorAll("[data-lang-switch]").forEach(function (root) {
+      var btn = root.querySelector("[data-lang-toggle]");
+      var menu = root.querySelector("[data-lang-menu]");
+      if (!btn || !menu) return;
+      function close() {
+        root.classList.remove("is-open");
+        btn.setAttribute("aria-expanded", "false");
+        menu.setAttribute("hidden", "");
+      }
+      function open() {
+        root.classList.add("is-open");
+        btn.setAttribute("aria-expanded", "true");
+        menu.removeAttribute("hidden");
+      }
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        if (root.classList.contains("is-open")) close();
+        else open();
+      });
+      menu.addEventListener("click", function (e) { e.stopPropagation(); });
+      document.addEventListener("click", function () { close(); });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") close();
+      });
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initHeader();
+    initLangSwitch();
     initReveal();
     initCookieBanner();
     initLeadTracking();

@@ -142,27 +142,99 @@ p { margin: 0 0 1em; }
   padding-block: 0.2rem;
 }
 .site-nav a:hover { color: #fff; }
-.langs { display: flex; gap: 0.35rem; }
-.langs a {
-  text-decoration: none;
-  color: #f4f6f8;
-  border: 1px solid rgba(244, 246, 248, 0.35);
-  border-radius: 6px;
-  min-width: 2.35rem;
-  min-height: 2.35rem;
+.langs {
+  display: flex;
+  position: relative;
+  justify-self: end;
+}
+.lang-flag {
+  width: 20px;
+  height: 15px;
+  display: block;
+  flex-shrink: 0;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(244, 246, 248, 0.28);
+  overflow: hidden;
+}
+.lang-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.4rem;
+  min-width: 4.1rem;
+  min-height: 2.35rem;
+  margin: 0;
+  padding: 0 0.55rem;
+  border: 1px solid rgba(244, 246, 248, 0.35);
+  border-radius: 6px;
+  background: transparent;
+  color: #f4f6f8;
+  font: inherit;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.08em;
-  padding: 0 0.35rem;
+  cursor: pointer;
 }
-.langs a.active,
-.langs a[aria-current="page"] {
+.langs.is-open .lang-toggle,
+.lang-toggle:hover,
+.lang-toggle:focus-visible {
   border-color: var(--gold);
   color: var(--gold);
+  outline: none;
 }
+.lang-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  right: 0;
+  z-index: 40;
+  min-width: 13.5rem;
+  padding: 0.35rem;
+  background: #0f1c28;
+  border: 1px solid rgba(244, 246, 248, 0.14);
+  border-radius: 10px;
+  box-shadow: 0 16px 40px rgba(11, 22, 32, 0.45);
+}
+.langs.is-open .lang-menu,
+.lang-menu:not([hidden]) {
+  display: block;
+}
+.langs.is-open .lang-menu[hidden] {
+  display: block;
+}
+.lang-menu a {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.4rem;
+  padding: 0.25rem 0.55rem;
+  border: 0;
+  border-radius: 7px;
+  color: rgba(244, 246, 248, 0.92);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+.lang-menu a:hover,
+.lang-menu a:focus-visible {
+  background: rgba(244, 246, 248, 0.08);
+  color: #fff;
+  outline: none;
+}
+.lang-menu a.is-current,
+.lang-menu a[aria-current="true"] {
+  color: var(--gold);
+}
+.lang-code {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  min-width: 1.5rem;
+}
+.lang-name { font-weight: 500; }
+body > nav { overflow: visible; }
 .nav-toggle {
   display: none;
   width: 2.75rem;
