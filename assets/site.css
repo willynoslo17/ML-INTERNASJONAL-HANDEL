@@ -316,9 +316,29 @@ footer .btn.whatsapp:hover { color: #fff; }
   padding: 1.6rem 1.45rem 1.5rem;
   box-shadow: 0 8px 24px rgba(11, 22, 32, 0.04);
 }
+.card .card-icon {
+  width: 2.55rem;
+  height: 2.55rem;
+  margin: 0 0 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: #f3eee3;
+  color: var(--gold-ink);
+}
+.card .card-icon svg {
+  width: 1.35rem;
+  height: 1.35rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 .card .kicker {
   display: inline-block;
-  margin: 0 0 0.85rem;
+  margin: 0 0 0.55rem;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -539,12 +559,15 @@ footer a:hover { color: var(--gold); }
 .wa-float svg { width: 1.45rem; height: 1.45rem; fill: currentColor; }
 
 @media (min-width: 720px) {
-  .cards { grid-template-columns: repeat(3, 1fr); }
+  .cards { grid-template-columns: repeat(2, 1fr); }
   .sectors-grid { grid-template-columns: repeat(2, 1fr); }
   .contact-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2.5rem; align-items: start; }
 }
 @media (min-width: 900px) {
   .about-grid { grid-template-columns: 1fr 1.15fr; align-items: start; gap: 3.5rem; }
+}
+@media (min-width: 1100px) {
+  .cards { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 899px) {
   .bar {
