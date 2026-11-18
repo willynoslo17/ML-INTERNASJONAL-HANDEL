@@ -1,13 +1,7 @@
 (function () {
   document.documentElement.classList.add("js");
   const CONTACT_EMAIL = "info@mlinternasjonal.no";
-  // Permanent: WhatsApp only — never add tel: or phone numbers on this site.
-  const WHATSAPP_BASE = "https://wa.me/4792211752";
-  const WHATSAPP_TEXT = {
-    es: "Hola, me interesa información sobre servicios de exportación y logística internacional.",
-    no: "Hei, jeg er interessert i informasjon om internasjonale eksport- og logistikktjenester.",
-    en: "Hello, I’m interested in information about international export and logistics services.",
-  };
+  // Permanent: never add tel: or phone numbers on this site.
   const COOKIE_KEY = "ml-cookie-consent";
 
   function qs(sel, root) {
@@ -259,21 +253,6 @@
     }, 700);
   }
 
-  function whatsappUrl() {
-    const lang = (document.documentElement.lang || "no").slice(0, 2);
-    const text = WHATSAPP_TEXT[lang] || WHATSAPP_TEXT.es;
-    return WHATSAPP_BASE + "?text=" + encodeURIComponent(text);
-  }
-
-  function initWhatsAppLinks() {
-    const href = whatsappUrl();
-    document.querySelectorAll('a[href^="https://wa.me/4792211752"]').forEach(function (link) {
-      link.href = href;
-    });
-    document.querySelectorAll(".wa-float").forEach(function (el) { el.remove(); });
-  }
-
-
   var LEAD_TOUCH_KEY = "ml-lead-first-touch";
 
   function leadParam(params, name) {
@@ -335,6 +314,5 @@
     initCookieBanner();
     initLeadTracking();
     initContactForm();
-    initWhatsAppLinks();
   });
 })();
