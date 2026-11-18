@@ -241,6 +241,8 @@ PAGE_GROUPS = [
     {"id": "home", "no": "/", "en": "/en/", "es": "/es/", "out": "/", "priority": "0.9", "changefreq": "weekly"},
     {"id": "who", "no": "/om-oss/", "en": "/en/who-we-are/", "es": "/es/quienes-somos/", "out": "/who-we-are/", "priority": "0.8", "changefreq": "monthly"},
     {"id": "what", "no": "/hva-vi-gjor/", "en": "/en/what-we-do/", "es": "/es/que-hacemos/", "out": "/what-we-do/", "priority": "0.8", "changefreq": "monthly"},
+    {"id": "services", "no": "/tjenester/", "en": "/en/services/", "es": "/es/servicios/", "out": "/services/", "priority": "0.8", "changefreq": "monthly"},
+    {"id": "sectors", "no": "/sektorer/", "en": "/en/sectors/", "es": "/es/sectores/", "out": "/sectors/", "priority": "0.8", "changefreq": "monthly"},
     {"id": "cookies", "no": "/cookies/", "en": "/en/cookies/", "es": "/es/cookies/", "out": "/cookies/", "priority": "0.4", "changefreq": "yearly"},
     {"id": "privacy", "no": "/personvern/", "en": "/en/privacy/", "es": "/es/privacidad/", "out": "/privacy/", "priority": "0.4", "changefreq": "yearly"},
     {"id": "terms", "no": "/vilkar/", "en": "/en/terms/", "es": "/es/terminos/", "out": "/terms/", "priority": "0.4", "changefreq": "yearly"},
