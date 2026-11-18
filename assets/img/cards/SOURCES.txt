@@ -1,0 +1,19 @@
+Card photos for mlinternasjonal.no homepage (1200×800 WebP, 3:2).
+All images are used under a license that allows commercial use. No trademarks or readable marketing text were kept in the cropped frames.
+
+Services
+- service-sourcing.webp — Pexels 2252584, fresh produce in crates
+- service-representation.webp — Pexels 3184465, handshake in a meeting
+- service-matching.webp — Pexels 3184338, business meeting
+- service-trade-support.webp — Pexels 262353, container ship (no readable carrier marks)
+- service-business-development.webp — Pexels 3184360, team around a laptop
+
+Sectors
+- sector-agriculture.webp — Pexels 1595108, aerial combine harvester
+- sector-fisheries.webp — Wikimedia Commons, CSIRO ScienceImage 2686 Salmon Cages, CSIRO / CC BY 3.0
+- sector-mining.webp — Pexels 38500487, open-pit mine
+- sector-oil-gas.webp — Pexels 257700, process plant and piping
+- sector-renewables.webp — Pexels 356036, solar panels
+- sector-electronics.webp — Pexels 163100, electronic components / circuit board
+- sector-industrial.webp — Pexels 236705, industrial hall
+- sector-construction.webp — Unsplash photo-1504307651254-35680f356dfd, construction site with steel rebar

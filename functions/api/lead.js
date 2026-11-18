@@ -68,17 +68,15 @@ function buildMime({ from, to, replyTo, subject, text }) {
 
 function letter(payload) {
   return [
-    "Ny henvendelse fra mlinternasjonal.no",
+    "Sector: " + payload.sector,
+    "Servicio: " + payload.service,
+    "Nombre: " + payload.name,
+    "Empresa: " + (payload.company || "—"),
+    "País: " + (payload.country || "—"),
+    "Correo: " + payload.email,
     "",
-    "Navn: " + payload.name,
-    "E-post: " + payload.email,
-    "Firma: " + (payload.company || "—"),
-    "Type: " + payload.interest,
-    "Språk: " + payload.lang,
-    "Tid: " + payload.submittedAt,
-    "",
-    "Melding:",
-    payload.message,
+    "Consulta:",
+    payload.consulta,
   ].join("\n");
 }
 
@@ -87,7 +85,7 @@ async function deliverEmail(env, payload) {
     throw new Error("email_binding_missing");
   }
   const to = env.CONTACT_INBOX || CONTACT_EMAIL;
-  const subject = "Henvendelse fra nettsiden (" + oneLine(payload.interest) + ") — " + oneLine(payload.name);
+  const subject = "Consulta mlinternasjonal.no (" + oneLine(payload.sector) + ") — " + oneLine(payload.name);
   const text = letter(payload);
 
   try {
@@ -143,19 +141,21 @@ export async function onRequestPost(context) {
     }
 
     const body = await context.request.json();
+    const sector = String(body.sector || "").trim();
+    const service = String(body.service || "").trim();
     const name = String(body.name || "").trim();
-    const email = String(body.email || "").trim();
-    const message = String(body.message || "").trim();
-    const lang = String(body.lang || "no").trim();
     const company = String(body.company || "").trim();
+    const country = String(body.country || body.pais || "").trim();
+    const email = String(body.email || "").trim();
+    const consulta = String(body.consulta || body.message || "").trim();
+    const lang = String(body.lang || "no").trim();
     const website = String(body.website || "").trim(); // honeypot
-    const interest = String(body.interest || "").trim();
 
     if (website) {
       return json({ ok: true }, 200, headers);
     }
 
-    if (!name || !email || !message || !interest) {
+    if (!sector || !service || !name || !email || !consulta) {
       return json(
         { ok: false, error: "missing_fields", contactEmail: CONTACT_EMAIL },
         400,
@@ -173,11 +173,13 @@ export async function onRequestPost(context) {
 
     const payload = {
       source: "mlinternasjonal.no",
+      sector,
+      service,
       name,
-      email,
       company,
-      interest,
-      message,
+      country,
+      email,
+      consulta,
       lang,
       submittedAt: new Date().toISOString(),
     };
