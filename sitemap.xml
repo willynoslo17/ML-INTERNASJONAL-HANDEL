@@ -29,6 +29,60 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://mlinternasjonal.no/es/quienes-somos/</loc>
+    <xhtml:link rel="alternate" hreflang="no" href="https://mlinternasjonal.no/om-oss/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mlinternasjonal.no/en/who-we-are/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mlinternasjonal.no/es/quienes-somos/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mlinternasjonal.no/om-oss/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mlinternasjonal.no/en/who-we-are/</loc>
+    <xhtml:link rel="alternate" hreflang="no" href="https://mlinternasjonal.no/om-oss/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mlinternasjonal.no/en/who-we-are/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mlinternasjonal.no/es/quienes-somos/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mlinternasjonal.no/om-oss/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mlinternasjonal.no/om-oss/</loc>
+    <xhtml:link rel="alternate" hreflang="no" href="https://mlinternasjonal.no/om-oss/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mlinternasjonal.no/en/who-we-are/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mlinternasjonal.no/es/quienes-somos/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mlinternasjonal.no/om-oss/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mlinternasjonal.no/es/que-hacemos/</loc>
+    <xhtml:link rel="alternate" hreflang="no" href="https://mlinternasjonal.no/hva-vi-gjor/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mlinternasjonal.no/en/what-we-do/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mlinternasjonal.no/es/que-hacemos/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mlinternasjonal.no/hva-vi-gjor/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mlinternasjonal.no/en/what-we-do/</loc>
+    <xhtml:link rel="alternate" hreflang="no" href="https://mlinternasjonal.no/hva-vi-gjor/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mlinternasjonal.no/en/what-we-do/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mlinternasjonal.no/es/que-hacemos/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mlinternasjonal.no/hva-vi-gjor/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mlinternasjonal.no/hva-vi-gjor/</loc>
+    <xhtml:link rel="alternate" hreflang="no" href="https://mlinternasjonal.no/hva-vi-gjor/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mlinternasjonal.no/en/what-we-do/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://mlinternasjonal.no/es/que-hacemos/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mlinternasjonal.no/hva-vi-gjor/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://mlinternasjonal.no/personvern/</loc>
     <xhtml:link rel="alternate" hreflang="no" href="https://mlinternasjonal.no/personvern/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://mlinternasjonal.no/en/privacy/"/>

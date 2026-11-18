@@ -66,7 +66,84 @@ function buildMime({ from, to, replyTo, subject, text }) {
   ].join("\r\n");
 }
 
+
+function clip(value, max) {
+  return String(value || "").replace(/[\r\n]+/g, " ").trim().slice(0, max);
+}
+
+function formatLima(iso) {
+  const date = iso ? new Date(iso) : new Date();
+  if (Number.isNaN(date.getTime())) return String(iso || "—");
+  try {
+    return (
+      new Intl.DateTimeFormat("es-PE", {
+        timeZone: "America/Lima",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+      }).format(date) + " (America/Lima)"
+    );
+  } catch (err) {
+    return date.toISOString();
+  }
+}
+
+function deviceFromUa(ua) {
+  const s = String(ua || "").toLowerCase();
+  if (!s) return "—";
+  if (/ipad|tablet|playbook|silk/.test(s)) return "Tablet";
+  if (/mobi|iphone|android.*mobile|windows phone|opera mini/.test(s)) return "Móvil";
+  return "Escritorio";
+}
+
+function deriveOrigen(payload) {
+  const hay = [
+    payload.utm_source,
+    payload.utm_medium,
+    payload.utm_campaign,
+    payload.referrer,
+    payload.landing_page,
+  ]
+    .join(" ")
+    .toLowerCase();
+  if (/(instagram|\big\b|ig\.me)/.test(hay)) return "Instagram";
+  if (/(facebook|fb\.com|fbclid|\bfb\b)/.test(hay)) return "Facebook";
+  if (/(linkedin|lnkd\.in)/.test(hay)) return "LinkedIn";
+  if (/(whatsapp|wa\.me|\bwa\b)/.test(hay)) return "WhatsApp";
+  if (/(google|gclid|googleapis)/.test(hay)) return "Google";
+  if (!String(payload.utm_source || "").trim() && !String(payload.referrer || "").trim()) {
+    return "Directo";
+  }
+  return "Otro";
+}
+
+function attributionFrom(request, body) {
+  const cf = request.cf || {};
+  const ua = request.headers.get("User-Agent") || "";
+  const submittedAt = new Date().toISOString();
+  return {
+    utm_source: clip(body.utm_source, 200),
+    utm_medium: clip(body.utm_medium, 200),
+    utm_campaign: clip(body.utm_campaign, 200),
+    referrer: clip(body.referrer, 500),
+    landing_page: clip(body.landing_page, 500),
+    submit_page: clip(body.submit_page, 500),
+    first_visit: clip(body.first_visit, 80),
+    cf_country: clip(cf.country, 80),
+    cf_city: clip(cf.city, 120),
+    user_agent: clip(ua, 400),
+    device: deviceFromUa(ua),
+    submittedAt,
+    origen: "",
+  };
+}
+
 function letter(payload) {
+  const origen = deriveOrigen(payload);
   return [
     "Sector: " + payload.sector,
     "Servicio: " + payload.service,
@@ -77,6 +154,21 @@ function letter(payload) {
     "",
     "Consulta:",
     payload.consulta,
+    "",
+    "======= Origen del contacto =======",
+    "Origen: " + origen,
+    "UTM source: " + (payload.utm_source || "—"),
+    "UTM medium: " + (payload.utm_medium || "—"),
+    "UTM campaign: " + (payload.utm_campaign || "—"),
+    "Referrer: " + (payload.referrer || "—"),
+    "Página de aterrizaje: " + (payload.landing_page || "—"),
+    "Página de envío: " + (payload.submit_page || "—"),
+    "Primera visita: " + (payload.first_visit ? formatLima(payload.first_visit) : "—"),
+    "País (Cloudflare): " + (payload.cf_country || "—"),
+    "Ciudad (Cloudflare): " + (payload.cf_city || "—"),
+    "Dispositivo: " + (payload.device || "—"),
+    "User-Agent: " + (payload.user_agent || "—"),
+    "Hora de envío: " + formatLima(payload.submittedAt),
   ].join("\n");
 }
 
@@ -181,8 +273,9 @@ export async function onRequestPost(context) {
       email,
       consulta,
       lang,
-      submittedAt: new Date().toISOString(),
+      ...attributionFrom(context.request, body),
     };
+    payload.origen = deriveOrigen(payload);
 
     try {
       await deliverEmail(context.env, payload);
