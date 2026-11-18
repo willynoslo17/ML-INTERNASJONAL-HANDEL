@@ -122,14 +122,50 @@
       policy: "Chính sách Cookie",
       policyHref: "/vi/cookies/",
     },
+    hi: {
+      text: "हम आवश्यक तकनीकी कुकीज़ का उपयोग करते हैं और आपकी विज़िट की उत्पत्ति (स्रोत और प्रवेश पृष्ठ) को ब्राउज़र में केवल यह जानने के लिए संग्रहीत करते हैं कि फॉर्म संपर्क कहाँ से आते हैं।",
+      accept: "स्वीकार करें",
+      reject: "अस्वीकार करें",
+      policy: "कुकी नीति",
+      policyHref: "/hi/cookies/",
+    },
+    fi: {
+      text: "Käytämme välttämättömiä teknisiä evästeitä ja tallennamme vierailusi alkuperän (lähde ja tulossivu) selaimeen ainoastaan tietääksemme, mistä lomakekontaktit tulevat.",
+      accept: "Hyväksy",
+      reject: "Hylkää",
+      policy: "Evästekäytäntö",
+      policyHref: "/fi/cookies/",
+    },
+    is: {
+      text: "Við notum nauðsynlegar tæknilegar vafrakökur og geymum uppruna heimsóknar þinnar (uppruni og inngangssíða) í vafranum eingöngu til að vita hvaðan formtengiliðir koma.",
+      accept: "Samþykkja",
+      reject: "Hafna",
+      policy: "Vafrakökustefna",
+      policyHref: "/is/cookies/",
+    },
+    it: {
+      text: "Utilizziamo cookie tecnici necessari e memorizziamo l’origine della tua visita (fonte e pagina di ingresso) nel browser solo per sapere da dove provengono i contatti del modulo.",
+      accept: "Accetta",
+      reject: "Rifiuta",
+      policy: "Informativa sui cookie",
+      policyHref: "/it/cookies/",
+    },
+    ko: {
+      text: "당사는 필수 기술 쿠키를 사용하며, 양식 문의의 출처를 파악하기 위해 브라우저에 방문 출처(소스 및 진입 페이지)를 저장합니다.",
+      accept: "동의",
+      reject: "거부",
+      policy: "쿠키 정책",
+      policyHref: "/ko/cookies/",
+    },
+    th: {
+      text: "เราใช้คุกกี้ทางเทคนิคที่จำเป็นและเก็บที่มาของการเข้าชม (แหล่งที่มาและหน้าเข้า) ในเบราว์เซอร์เพื่อทราบว่าการติดต่อจากแบบฟอร์มมาจากที่ใดเท่านั้น",
+      accept: "ยอมรับ",
+      reject: "ปฏิเสธ",
+      policy: "นโยบายคุกกี้",
+      policyHref: "/th/cookies/",
+    },
   };
 
-  COOKIE_COPY.fi = COOKIE_COPY.en;
-  COOKIE_COPY.is = COOKIE_COPY.en;
-  COOKIE_COPY.it = COOKIE_COPY.en;
-  COOKIE_COPY.hi = COOKIE_COPY.en;
-  COOKIE_COPY.ko = COOKIE_COPY.en;
-  COOKIE_COPY.th = COOKIE_COPY.en;
   COOKIE_COPY.ar = COOKIE_COPY.en;
   COOKIE_COPY.ms = COOKIE_COPY.en;
 
@@ -253,6 +289,36 @@
         sending: "Đang gửi…",
         ok: "Cảm ơn tin nhắn của bạn. Chúng tôi sẽ phản hồi sớm.",
         err: "Không thể gửi tin nhắn. Vui lòng thử lại hoặc viết thư cho chúng tôi tại info@mlinternasjonal.no.",
+      },
+        hi: {
+        sending: "भेजा जा रहा है…",
+        ok: "आपके संदेश के लिए धन्यवाद। हम जल्द ही संपर्क करेंगे।",
+        err: "संदेश नहीं भेजा जा सका। कृपया पुनः प्रयास करें या info@mlinternasjonal.no पर लिखें।",
+      },
+        fi: {
+        sending: "Lähetetään…",
+        ok: "Kiitos viestistäsi. Palaamme asiaan pian.",
+        err: "Viestiä ei voitu lähettää. Yritä uudelleen tai kirjoita meille osoitteeseen info@mlinternasjonal.no.",
+      },
+        is: {
+        sending: "Sendir…",
+        ok: "Takk fyrir skilaboðin. Við munum svara fljótlega.",
+        err: "Ekki tókst að senda skilaboðin. Reyndu aftur eða skrifaðu okkur á info@mlinternasjonal.no.",
+      },
+        it: {
+        sending: "Invio in corso…",
+        ok: "Grazie per il tuo messaggio. Ti risponderemo presto.",
+        err: "Il messaggio non è stato inviato. Riprova o scrivici a info@mlinternasjonal.no.",
+      },
+        ko: {
+        sending: "보내는 중…",
+        ok: "메시지를 보내주셔서 감사합니다. 곧 답변드리겠습니다.",
+        err: "메시지를 보낼 수 없습니다. 다시 시도하거나 info@mlinternasjonal.no로 문의해 주세요.",
+      },
+        th: {
+        sending: "กำลังส่ง…",
+        ok: "ขอบคุณสำหรับข้อความของคุณ เราจะติดต่อกลับเร็ว ๆ นี้",
+        err: "ไม่สามารถส่งข้อความได้ กรุณาลองอีกครั้งหรือเขียนถึงเราที่ info@mlinternasjonal.no",
       },
     };
 
