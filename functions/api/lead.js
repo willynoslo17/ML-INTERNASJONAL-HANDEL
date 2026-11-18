@@ -1,9 +1,11 @@
 /**
  * Cloudflare Pages Function: POST /api/lead
- * Forwards contact form submissions to Make via MAKE_WEBHOOK_URL.
- * Set the secret in Cloudflare Pages: MAKE_WEBHOOK_URL
+ * Delivers contact form submissions to info@mlinternasjonal.no
+ * via the EMAIL send_email binding (Cloudflare Email Routing).
+ * Optional: also POST to MAKE_WEBHOOK_URL if that Pages secret is set.
  */
 const CONTACT_EMAIL = "info@mlinternasjonal.no";
+const FROM_EMAIL = "skjema@mlinternasjonal.no";
 
 function json(data, status = 200, extraHeaders = {}) {
   return new Response(JSON.stringify(data), {
@@ -29,6 +31,98 @@ function corsHeaders(request) {
     "Access-Control-Allow-Headers": "Content-Type",
     Vary: "Origin",
   };
+}
+
+function oneLine(value) {
+  return String(value || "").replace(/[\r\n]+/g, " ").trim();
+}
+
+function b64utf8(value) {
+  const bytes = new TextEncoder().encode(value);
+  let bin = "";
+  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+  return btoa(bin);
+}
+
+function encodeHeader(value) {
+  const clean = oneLine(value);
+  if (/^[\x20-\x7E]*$/.test(clean)) return clean;
+  return "=?UTF-8?B?" + b64utf8(clean) + "?=";
+}
+
+function buildMime({ from, to, replyTo, subject, text }) {
+  const mid = "<" + crypto.randomUUID() + "@mlinternasjonal.no>";
+  return [
+    "From: ML Internasjonal Handel <" + from + ">",
+    "To: " + to,
+    "Reply-To: " + replyTo,
+    "Subject: " + encodeHeader(subject),
+    "Message-ID: " + mid,
+    "MIME-Version: 1.0",
+    "Content-Type: text/plain; charset=UTF-8",
+    "Content-Transfer-Encoding: 8bit",
+    "",
+    text,
+  ].join("\r\n");
+}
+
+function letter(payload) {
+  return [
+    "Ny henvendelse fra mlinternasjonal.no",
+    "",
+    "Navn: " + payload.name,
+    "E-post: " + payload.email,
+    "Firma: " + (payload.company || "—"),
+    "Type: " + payload.interest,
+    "Språk: " + payload.lang,
+    "Tid: " + payload.submittedAt,
+    "",
+    "Melding:",
+    payload.message,
+  ].join("\n");
+}
+
+async function deliverEmail(env, payload) {
+  if (!env.EMAIL || typeof env.EMAIL.send !== "function") {
+    throw new Error("email_binding_missing");
+  }
+  const to = env.CONTACT_INBOX || CONTACT_EMAIL;
+  const subject = "Henvendelse fra nettsiden (" + oneLine(payload.interest) + ") — " + oneLine(payload.name);
+  const text = letter(payload);
+
+  try {
+    await env.EMAIL.send({
+      to,
+      from: { email: FROM_EMAIL, name: "ML Internasjonal Handel" },
+      replyTo: payload.email,
+      subject,
+      text,
+    });
+    return;
+  } catch (structuredErr) {
+    const { EmailMessage } = await import("cloudflare:email");
+    const raw = buildMime({
+      from: FROM_EMAIL,
+      to,
+      replyTo: payload.email,
+      subject,
+      text,
+    });
+    await env.EMAIL.send(new EmailMessage(FROM_EMAIL, to, raw));
+  }
+}
+
+async function notifyWebhook(env, payload) {
+  const webhookUrl = env.MAKE_WEBHOOK_URL;
+  if (!webhookUrl) return;
+  const upstream = await fetch(webhookUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (!upstream.ok) {
+    console.error("webhook_failed", upstream.status);
+  }
 }
 
 export async function onRequestOptions(context) {
@@ -88,30 +182,18 @@ export async function onRequestPost(context) {
       submittedAt: new Date().toISOString(),
     };
 
-    const webhookUrl = context.env.MAKE_WEBHOOK_URL;
-    if (!webhookUrl) {
-      // No webhook configured: surface the contact email to the client (still HTTP 200).
+    try {
+      await deliverEmail(context.env, payload);
+    } catch (err) {
+      console.error("email_delivery_failed", err && err.code, err && err.message);
       return json(
-        { ok: false, error: "webhook_not_configured", contactEmail: CONTACT_EMAIL },
-        200,
-        headers
-      );
-    }
-
-    const upstream = await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-
-    if (!upstream.ok) {
-      return json(
-        { ok: false, error: "upstream_failed", contactEmail: CONTACT_EMAIL },
+        { ok: false, error: "email_failed", contactEmail: CONTACT_EMAIL },
         502,
         headers
       );
     }
 
+    context.waitUntil(notifyWebhook(context.env, payload));
     return json({ ok: true }, 200, headers);
   } catch (err) {
     return json(
