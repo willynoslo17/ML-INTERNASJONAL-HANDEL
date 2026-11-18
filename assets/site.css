@@ -451,7 +451,7 @@ footer a:hover { color: var(--gold); }
   width: min(100% - 2.5rem, var(--max));
   margin-inline: auto;
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr;
+  grid-template-columns: 1.6fr 1fr;
   gap: 2rem 2.5rem;
 }
 .footer-grid strong {
