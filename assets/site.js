@@ -164,10 +164,16 @@
       policy: "นโยบายคุกกี้",
       policyHref: "/th/cookies/",
     },
+    ms: {
+      text: "Kami menggunakan kuki teknikal yang diperlukan dan menyimpan asal lawatan anda (sumber dan halaman masuk) dalam pelayar hanya untuk mengetahui dari mana kenalan borang datang.",
+      accept: "Terima",
+      reject: "Tolak",
+      policy: "Dasar Kuki",
+      policyHref: "/ms/cookies/",
+    },
   };
 
   COOKIE_COPY.ar = COOKIE_COPY.en;
-  COOKIE_COPY.ms = COOKIE_COPY.en;
 
   function ensureCookieBanner() {
     let banner = qs("#cookie-banner");
@@ -319,6 +325,11 @@
         sending: "กำลังส่ง…",
         ok: "ขอบคุณสำหรับข้อความของคุณ เราจะติดต่อกลับเร็ว ๆ นี้",
         err: "ไม่สามารถส่งข้อความได้ กรุณาลองอีกครั้งหรือเขียนถึงเราที่ info@mlinternasjonal.no",
+      },
+        ms: {
+        sending: "Menghantar…",
+        ok: "Terima kasih atas mesej anda. Kami akan menghubungi anda tidak lama lagi.",
+        err: "Mesej tidak dapat dihantar. Sila cuba lagi atau tulis kepada kami di info@mlinternasjonal.no.",
       },
     };
 
