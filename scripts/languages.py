@@ -240,8 +240,9 @@ def menu_link(lang: dict, current_key: str | None = None) -> str:
     attrs = f'href="{href_for(lang)}" hreflang="{lang["hreflang"]}" lang="{lang["html_lang"]}"'
     if current:
         attrs += ' class="is-current" aria-current="true"'
-    if lang["dir"] == "rtl":
-        attrs += ' dir="rtl"'
+    # Do not set dir=rtl on the menu link itself: that flips a single row
+    # inside an otherwise LTR dropdown. RTL is applied on the Arabic page
+    # via <html dir="rtl">.
     return (
         f"<a {attrs}>{lang['flag']}"
         f'<span class="lang-code">{lang["code"]}</span>'

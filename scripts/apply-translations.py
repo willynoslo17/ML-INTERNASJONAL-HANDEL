@@ -290,8 +290,6 @@ def rebuild_lang_menu(soup: BeautifulSoup, current_key: str, page_id: str, built
         if current:
             attrs["class"] = "is-current"
             attrs["aria-current"] = "true"
-        if item["dir"] == "rtl":
-            attrs["dir"] = "rtl"
         a = soup.new_tag("a", **attrs)
         # flags as literal HTML
         flag = BeautifulSoup(item["flag"], "lxml")
