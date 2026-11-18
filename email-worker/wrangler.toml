@@ -1,0 +1,16 @@
+name = "ml-contact-form"
+main = "src/index.js"
+compatibility_date = "2026-11-13"
+account_id = "c1b75fdaf97a19aebccca79bd81beb70"
+
+[[send_email]]
+name = "EMAIL"
+destination_address = "willynoslo17@gmail.com"
+
+[[routes]]
+pattern = "mlinternasjonal.no/api/lead"
+zone_name = "mlinternasjonal.no"
+
+[[routes]]
+pattern = "www.mlinternasjonal.no/api/lead"
+zone_name = "mlinternasjonal.no"
