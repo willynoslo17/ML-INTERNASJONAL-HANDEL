@@ -4,9 +4,9 @@
   // Permanent: WhatsApp only — never add tel: or phone numbers on this site.
   const WHATSAPP_BASE = "https://wa.me/4792211752";
   const WHATSAPP_TEXT = {
-    es: "Hola ML Internasjonal Handel",
-    no: "Hei ML Internasjonal Handel",
-    en: "Hello ML Internasjonal Handel",
+    es: "Hola, me interesa información sobre servicios de exportación y logística internacional.",
+    no: "Hei, jeg er interessert i informasjon om internasjonale eksport- og logistikktjenester.",
+    en: "Hello, I’m interested in information about international export and logistics services.",
   };
   const COOKIE_KEY = "ml-cookie-consent";
 
@@ -33,19 +33,25 @@
 
   const COOKIE_COPY = {
     no: {
-      html: "Vi bruker nødvendige informasjonskapsler for at nettstedet skal fungere. Hvis du godtar, bruker vi også Meta-pikselen (Facebook) for å måle besøk. Du kan godta eller avvise valgfrie informasjonskapsler. Les mer i <a href=\"/cookies/\">cookie-erklæringen</a> og i <a href=\"/personvern/\">personvernerklæringen</a>.",
+      text: "Vi bruker nødvendige tekniske informasjonskapsler og lagrer opprinnelsen til besøket ditt (kilde og inngangsside) i nettleseren bare for å vite hvor henvendelsene fra skjemaet kommer fra.",
       accept: "Godta",
       reject: "Avvis",
+      policy: "Informasjonskapselpolicy",
+      policyHref: "/cookies/",
     },
     en: {
-      html: "We use necessary cookies for the site to work. If you accept, we also use the Meta (Facebook) Pixel to measure visits. You can accept or reject optional cookies. Read more in our <a href=\"/en/cookies/\">cookie policy</a> and <a href=\"/en/privacy/\">privacy policy</a>.",
+      text: "We use necessary technical cookies and store the origin of your visit (source and entry page) in the browser only to know where form contacts come from.",
       accept: "Accept",
       reject: "Reject",
+      policy: "Cookie Policy",
+      policyHref: "/en/cookies/",
     },
     es: {
-      html: "Usamos cookies necesarias para que el sitio funcione. Si aceptas, también usamos el píxel de Meta (Facebook) para medir las visitas. Puedes aceptar o rechazar las cookies opcionales. Más información en la <a href=\"/es/cookies/\">política de cookies</a> y en la <a href=\"/es/privacidad/\">política de privacidad</a>.",
+      text: "Usamos cookies técnicas necesarias y guardamos en el navegador el origen de tu visita (fuente y página de entrada) solo para saber de dónde llegan los contactos del formulario.",
       accept: "Aceptar",
       reject: "Rechazar",
+      policy: "Política de cookies",
+      policyHref: "/es/cookies/",
     },
   };
 
@@ -60,10 +66,11 @@
     banner.setAttribute("aria-live", "polite");
     banner.setAttribute("aria-label", "Cookies");
     banner.innerHTML =
-      "<p>" + copy.html + "</p>" +
+      "<p>" + copy.text + "</p>" +
       '<div class="cookie-actions">' +
       '<button class="btn solid" type="button" data-cookie-accept>' + copy.accept + "</button>" +
       '<button class="btn" type="button" data-cookie-reject>' + copy.reject + "</button>" +
+      '<a class="btn" href="' + copy.policyHref + '">' + copy.policy + "</a>" +
       "</div>";
     document.body.appendChild(banner);
     return banner;
@@ -101,18 +108,18 @@
     const messages = {
       no: {
         sending: "Sender…",
-        ok: "Takk. Meldingen er sendt.",
-        err: "Kunne ikke sende. Skriv til ",
+        ok: "Takk for meldingen. Vi tar kontakt snart.",
+        err: "Meldingen kunne ikke sendes. Prøv igjen eller skriv til oss på info@mlinternasjonal.no.",
       },
       en: {
         sending: "Sending…",
-        ok: "Thank you. Your message has been sent.",
-        err: "Could not send. Please email ",
+        ok: "Thank you for your message. We will get back to you soon.",
+        err: "The message could not be sent. Please try again or write to us at info@mlinternasjonal.no.",
       },
       es: {
         sending: "Enviando…",
-        ok: "Gracias. Tu mensaje ha sido enviado.",
-        err: "No se pudo enviar. Escribe a ",
+        ok: "Gracias por tu mensaje. Te contactaremos pronto.",
+        err: "No se pudo enviar el mensaje. Inténtalo de nuevo o escríbenos a info@mlinternasjonal.no.",
       },
     };
 
@@ -167,16 +174,21 @@
           form.reset();
           fillLeadFields(form);
         } else {
-          const email = json.contactEmail || CONTACT_EMAIL;
           if (status) {
             status.className = "form-status err";
-            status.innerHTML = t.err + '<a href="mailto:' + email + '">' + email + "</a>";
+            status.innerHTML = t.err.replace(
+              /info@mlinternasjonal\.no/g,
+              '<a href="mailto:info@mlinternasjonal.no">info@mlinternasjonal.no</a>'
+            );
           }
         }
       } catch (err) {
         if (status) {
           status.className = "form-status err";
-          status.innerHTML = t.err + '<a href="mailto:' + CONTACT_EMAIL + '">' + CONTACT_EMAIL + "</a>";
+          status.innerHTML = t.err.replace(
+            /info@mlinternasjonal\.no/g,
+            '<a href="mailto:info@mlinternasjonal.no">info@mlinternasjonal.no</a>'
+          );
         }
       } finally {
         if (submitBtn) submitBtn.disabled = false;
@@ -256,7 +268,7 @@
   function initWhatsAppLinks() {
     const href = whatsappUrl();
     document.querySelectorAll('a[href^="https://wa.me/4792211752"]').forEach(function (link) {
-      if (link.href.indexOf("text=") === -1) link.href = href;
+      link.href = href;
     });
     document.querySelectorAll(".wa-float").forEach(function (el) { el.remove(); });
   }

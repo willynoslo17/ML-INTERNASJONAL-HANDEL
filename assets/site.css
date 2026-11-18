@@ -536,6 +536,28 @@ footer a:hover { color: var(--gold); }
   fill: currentColor;
   margin: 0;
 }
+.footer-tagline {
+  display: block;
+  margin: 0 0 0.75rem;
+  color: rgba(244, 246, 248, 0.82);
+  max-width: 28rem;
+}
+.social-label {
+  display: block;
+  margin: 1.15rem 0 0.45rem;
+  color: #fff;
+  font-weight: 600;
+}
+.footer-grid .social-links { margin-top: 0; }
+footer > .footer-tagline,
+footer > .social-label {
+  width: min(100% - 2.5rem, var(--max));
+  margin-left: auto;
+  margin-right: auto;
+}
+footer > .social-label { margin-top: 0.35rem; margin-bottom: 0.45rem; }
+footer > .footer-tagline { margin-top: 0; margin-bottom: 0.8rem; }
+
 footer > .social-links {
   width: min(100% - 2.5rem, var(--max));
   margin: 0 auto 1.2rem;
