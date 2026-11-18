@@ -17,7 +17,7 @@
   }
 
   function pageLang() {
-    var codes = ["zh-tw", "zh", "ja", "vi", "hi", "ko", "th", "ar", "ms", "pt", "fr", "fi", "is", "qu", "da", "de", "nl", "sv", "es", "en", "no"];
+    var codes = ["zh-tw", "zh", "ja", "vi", "hi", "ko", "th", "ar", "ms", "pt", "fr", "fi", "is", "it", "qu", "da", "de", "nl", "sv", "es", "en", "no"];
     var path = (location.pathname || "").toLowerCase();
     for (var i = 0; i < codes.length; i++) {
       if (path === "/" + codes[i] || path.indexOf("/" + codes[i] + "/") === 0) return codes[i];
@@ -52,21 +52,81 @@
       policy: "Política de cookies",
       policyHref: "/es/cookies/",
     },
+    qu: {
+      text: "Necesario técnica cookies llamkanchik chaymanta visitaykipa origenni (fuente chaymanta entry página) browserpi saqinchik form contactokuna maymanta hamusqanta yachanapaq.",
+      accept: "Chaskiy",
+      reject: "Ama chaskiy",
+      policy: "Cookie Política",
+      policyHref: "/qu/cookies/",
+    },
+    da: {
+      text: "Vi bruger nødvendige tekniske cookies og gemmer oprindelsen af dit besøg (kilde og indgangsside) i browseren udelukkende for at vide, hvor formularhenvendelser kommer fra.",
+      accept: "Accepter",
+      reject: "Afvis",
+      policy: "Cookiepolitik",
+      policyHref: "/da/cookies/",
+    },
+    de: {
+      text: "Wir verwenden notwendige technische Cookies und speichern die Herkunft Ihres Besuchs (Quelle und Einstiegsseite) im Browser ausschließlich, um zu wissen, woher Formularanfragen kommen.",
+      accept: "Akzeptieren",
+      reject: "Ablehnen",
+      policy: "Cookie-Richtlinie",
+      policyHref: "/de/cookies/",
+    },
+    nl: {
+      text: "Wij gebruiken noodzakelijke technische cookies en slaan de herkomst van uw bezoek (bron en intredingspagina) alleen in de browser op om te weten waar formuliercontacten vandaan komen.",
+      accept: "Accepteren",
+      reject: "Weigeren",
+      policy: "Cookiebeleid",
+      policyHref: "/nl/cookies/",
+    },
+    sv: {
+      text: "Vi använder nödvändiga tekniska cookies och lagrar ursprunget för ditt besök (källa och landningssida) i webbläsaren enbart för att veta varifrån formulärkontakter kommer.",
+      accept: "Acceptera",
+      reject: "Avvisa",
+      policy: "Cookiepolicy",
+      policyHref: "/sv/cookies/",
+    },
+    fr: {
+      text: "Nous utilisons des cookies techniques nécessaires et enregistrons l’origine de votre visite (source et page d’entrée) dans le navigateur uniquement pour savoir d’où proviennent les contacts du formulaire.",
+      accept: "Accepter",
+      reject: "Refuser",
+      policy: "Politique relative aux cookies",
+      policyHref: "/fr/cookies/",
+    },
+    zh: {
+      text: "我们使用必要的技术Cookie，并在浏览器中存储您访问的来源（来源和入口页面），仅用于了解表单联系来自何处。",
+      accept: "接受",
+      reject: "拒绝",
+      policy: "Cookie政策",
+      policyHref: "/zh/cookies/",
+    },
+    "zh-tw": {
+      text: "我們使用必要的技術Cookie，並在瀏覽器中儲存您造訪的來源（來源與入口頁面），僅用於了解表單聯絡來自何處。",
+      accept: "接受",
+      reject: "拒絕",
+      policy: "Cookie政策",
+      policyHref: "/zh-tw/cookies/",
+    },
+    ja: {
+      text: "当社は必要不可欠な技術Cookieを使用し、フォームからの問い合わせ元を把握するためだけに、ブラウザに訪問元（ソースおよび入口ページ）を保存します。",
+      accept: "同意する",
+      reject: "拒否する",
+      policy: "Cookieポリシー",
+      policyHref: "/ja/cookies/",
+    },
+    vi: {
+      text: "Chúng tôi sử dụng cookie kỹ thuật cần thiết và lưu trữ nguồn gốc chuyến thăm của bạn (nguồn và trang vào) trong trình duyệt chỉ để biết liên hệ từ biểu mẫu đến từ đâu.",
+      accept: "Chấp nhận",
+      reject: "Từ chối",
+      policy: "Chính sách Cookie",
+      policyHref: "/vi/cookies/",
+    },
   };
 
-  COOKIE_COPY.qu = COOKIE_COPY.es;
-  COOKIE_COPY.da = COOKIE_COPY.en;
-  COOKIE_COPY.de = COOKIE_COPY.en;
-  COOKIE_COPY.nl = COOKIE_COPY.en;
-  COOKIE_COPY.sv = COOKIE_COPY.en;
   COOKIE_COPY.fi = COOKIE_COPY.en;
   COOKIE_COPY.is = COOKIE_COPY.en;
-  COOKIE_COPY.pt = COOKIE_COPY.en;
-  COOKIE_COPY.fr = COOKIE_COPY.en;
-  COOKIE_COPY.zh = COOKIE_COPY.en;
-  COOKIE_COPY["zh-tw"] = COOKIE_COPY.en;
-  COOKIE_COPY.ja = COOKIE_COPY.en;
-  COOKIE_COPY.vi = COOKIE_COPY.en;
+  COOKIE_COPY.it = COOKIE_COPY.en;
   COOKIE_COPY.hi = COOKIE_COPY.en;
   COOKIE_COPY.ko = COOKIE_COPY.en;
   COOKIE_COPY.th = COOKIE_COPY.en;
@@ -138,6 +198,61 @@
         sending: "Enviando…",
         ok: "Gracias por tu mensaje. Te contactaremos pronto.",
         err: "No se pudo enviar el mensaje. Inténtalo de nuevo o escríbenos a info@mlinternasjonal.no.",
+      },
+        qu: {
+        sending: "Apachisqa…",
+        ok: "Mensajeykipaq gracias. Pronto kutimuyku.",
+        err: "Mensaje mana apachisqa. Please try again o info@mlinternasjonal.no man qillqayku.",
+      },
+        da: {
+        sending: "Sender…",
+        ok: "Tak for din besked. Vi vender tilbage snart.",
+        err: "Beskeden kunne ikke sendes. Prøv igen eller skriv til os på info@mlinternasjonal.no.",
+      },
+        de: {
+        sending: "Wird gesendet…",
+        ok: "Vielen Dank für Ihre Nachricht. Wir melden uns bald bei Ihnen.",
+        err: "Die Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder schreiben Sie uns an info@mlinternasjonal.no.",
+      },
+        nl: {
+        sending: "Verzenden…",
+        ok: "Bedankt voor uw bericht. Wij nemen spoedig contact met u op.",
+        err: "Het bericht kon niet worden verzonden. Probeer het opnieuw of schrijf ons op info@mlinternasjonal.no.",
+      },
+        sv: {
+        sending: "Skickar…",
+        ok: "Tack för ditt meddelande. Vi återkommer snart.",
+        err: "Meddelandet kunde inte skickas. Försök igen eller skriv till oss på info@mlinternasjonal.no.",
+      },
+        pt: {
+        sending: "A enviar…",
+        ok: "Obrigado pela sua mensagem. Entraremos em contacto em breve.",
+        err: "A mensagem não pôde ser enviada. Tente novamente ou escreva-nos para info@mlinternasjonal.no.",
+      },
+        fr: {
+        sending: "Envoi en cours…",
+        ok: "Merci pour votre message. Nous vous répondrons bientôt.",
+        err: "Le message n’a pas pu être envoyé. Veuillez réessayer ou nous écrire à info@mlinternasjonal.no.",
+      },
+        zh: {
+        sending: "发送中…",
+        ok: "感谢您的留言。我们将尽快回复。",
+        err: "消息无法发送。请重试或发送邮件至 info@mlinternasjonal.no。",
+      },
+        "zh-tw": {
+        sending: "送出中…",
+        ok: "感謝您的留言。我們將盡快回覆。",
+        err: "訊息無法送出。請再試一次或寄信至 info@mlinternasjonal.no。",
+      },
+        ja: {
+        sending: "送信中…",
+        ok: "メッセージをありがとうございます。近日中にご連絡いたします。",
+        err: "メッセージを送信できませんでした。再度お試しいただくか、info@mlinternasjonal.noまでご連絡ください。",
+      },
+        vi: {
+        sending: "Đang gửi…",
+        ok: "Cảm ơn tin nhắn của bạn. Chúng tôi sẽ phản hồi sớm.",
+        err: "Không thể gửi tin nhắn. Vui lòng thử lại hoặc viết thư cho chúng tôi tại info@mlinternasjonal.no.",
       },
     };
 

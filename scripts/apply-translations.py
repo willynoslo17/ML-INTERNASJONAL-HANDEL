@@ -199,7 +199,7 @@ def rewrite_en_urls(soup: BeautifulSoup, lang: dict) -> None:
             tag["content"] = SITE + prefix + val[len("https://mlinternasjonal.no/en"):]
 
 
-def set_head(soup: BeautifulSoup, lang: dict, page_id: str, trans: dict, warn: list) -> None:
+def set_head(soup: BeautifulSoup, lang: dict, page_id: str, trans: dict, warn: list, built: set[str] | None = None) -> None:
     html = soup.find("html")
     html["lang"] = lang["html_lang"]
     if lang["dir"] == "rtl":
@@ -226,7 +226,7 @@ def set_head(soup: BeautifulSoup, lang: dict, page_id: str, trans: dict, warn: l
         if tag:
             tag["content"] = val
 
-    # Replace alternate links with the full 19 + x-default, pointing at
+    # Replace alternate links for all 22 languages, pointing at
     # equivalent pages for no/en/es and at language roots for placeholders
     # unless those languages have been fully built (detected by caller).
     for tag in list(soup.find_all("link", rel="alternate")):
@@ -235,7 +235,7 @@ def set_head(soup: BeautifulSoup, lang: dict, page_id: str, trans: dict, warn: l
     # Insert after canonical if possible
     anchor = can
     for item in LANGUAGES:
-        href = equivalent_href(item["key"], page_id, built=None)
+        href = equivalent_href(item["key"], page_id, built)
         tag = soup.new_tag("link", rel="alternate", hreflang=item["hreflang"], href=SITE + href)
         if anchor:
             anchor.insert_after(tag)
@@ -680,7 +680,7 @@ def build_language(lang_key: str, trans: dict, built: set[str], dest_root: Path,
         apply_common(soup, trans, warn)
         APPLIERS[page_id](soup, trans, warn)
         rewrite_en_urls(soup, lang)
-        set_head(soup, lang, page_id, trans, warn)
+        set_head(soup, lang, page_id, trans, warn, built | {lang_key})
         rebuild_lang_menu(soup, lang_key, page_id, built | {lang_key})
         # Cookie policy href should be this language
         for a in soup.select(".cookie-actions a, .cookie-banner a"):
@@ -691,11 +691,19 @@ def build_language(lang_key: str, trans: dict, built: set[str], dest_root: Path,
         out = dest_root / lang["path"] / (slug.lstrip("/") + ("index.html" if slug.endswith("/") or slug == "/" else "/index.html"))
         if slug == "/":
             out = dest_root / lang["path"] / "index.html"
-        # affiliate stays noindex
+        robots = soup.find("meta", attrs={"name": "robots"})
         if page_id == "affiliate":
-            robots = soup.find("meta", attrs={"name": "robots"})
             if robots:
                 robots["content"] = "noindex,nofollow"
+            else:
+                tag = soup.new_tag("meta", attrs={"name": "robots", "content": "noindex,nofollow"})
+                if soup.head:
+                    soup.head.append(tag)
+        else:
+            if robots:
+                robots["content"] = "index,follow"
+            elif soup.head:
+                soup.head.append(soup.new_tag("meta", attrs={"name": "robots", "content": "index,follow"}))
         html = str(soup)
         # BeautifulSoup may add <html>/<body> wrappers around fragments; we
         # started from a full document, lxml keeps doctype sometimes missing.
@@ -739,7 +747,7 @@ def update_site_js(lang_key: str, trans: dict, dry: bool, warn: list) -> None:
                 js = js[:obj_end] + block + js[obj_end:]
             # remove alias assignment if present
             js = re.sub(
-                rf"\n  COOKIE_COPY{re.escape(js_assign(lang_key))} = COOKIE_COPY\.en;",
+                rf"\n  COOKIE_COPY{re.escape(js_assign(lang_key))} = COOKIE_COPY\.(en|es);",
                 "",
                 js,
             )
@@ -788,6 +796,48 @@ def js_assign(lang_key: str) -> str:
 def js_str(text: str) -> str:
     import json
     return json.dumps(text, ensure_ascii=False)
+
+
+
+def refresh_sitemap(built: set[str], dry: bool) -> None:
+    """Upsert non-blog loc entries and alternates for every fully built language."""
+    path = ROOT / "sitemap.xml"
+    xml = path.read_text(encoding="utf-8")
+    original = xml
+    built = set(built) | {"no", "en", "es"}
+    for group in PAGE_GROUPS:
+        for lang_key in [l["key"] for l in LANGUAGES]:
+            if lang_key not in built:
+                continue
+            loc = SITE + equivalent_href(lang_key, group["id"], built)
+            alts = []
+            for item in LANGUAGES:
+                href = SITE + equivalent_href(item["key"], group["id"], built)
+                alts.append(
+                    f'    <xhtml:link rel="alternate" hreflang="{item["hreflang"]}" href="{href}"/>'
+                )
+            alts.append(f'    <xhtml:link rel="alternate" hreflang="x-default" href="{SITE}/"/>')
+            block = (
+                "  <url>\n"
+                f"    <loc>{loc}</loc>\n"
+                + "\n".join(alts)
+                + "\n"
+                f"    <changefreq>{group['changefreq']}</changefreq>\n"
+                f"    <priority>{group['priority']}</priority>\n"
+                "  </url>\n"
+            )
+            pat = re.compile(
+                r"  <url>\s*<loc>" + re.escape(loc) + r"</loc>[\s\S]*?</url>\s*"
+            )
+            if pat.search(xml):
+                xml = pat.sub(block, xml, count=1)
+            else:
+                xml = xml.replace("</urlset>", block + "</urlset>")
+    if xml != original and not dry:
+        path.write_text(xml, encoding="utf-8")
+        print("  refreshed sitemap.xml for", ", ".join(sorted(built)))
+    elif xml != original:
+        print("  DRY sitemap.xml refresh for", ", ".join(sorted(built)))
 
 
 def update_sitemap(lang_key: str, dry: bool) -> None:
@@ -902,7 +952,7 @@ def self_test() -> int:
     home = (dest / "pt/index.html").read_text(encoding="utf-8")
     checks = [
         ("hero title", "International trade that gets done." in home),
-        ("19 langs", home.count('class="lang-code"') == 21),
+        ("19 langs", home.count('class="lang-code"') == 22),
         ("PT current", 'aria-current="true"' in home and "Português" in home),
         ("blog href stays EN", 'href="/en/blog/"' in home and "/pt/blog" not in home),
         ("spain flag", "#AA151B" in home),
@@ -928,7 +978,8 @@ def self_test() -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--lang", help="Language key, e.g. pt, fr, zh, zh-tw, ar")
+    parser.add_argument("--lang", action="append", help="Language key, e.g. pt, fr, zh, zh-tw (repeatable)")
+    parser.add_argument("--langs", help="Comma-separated language keys")
     parser.add_argument("--all", action="store_true", help="Build every language that has a chunks folder")
     parser.add_argument("--chunks-dir", type=Path, help="Folder of chunk-*.md (default /workspace/ml-traducir/<lang>/)")
     parser.add_argument("--out-dir", type=Path, default=ROOT, help="Site root to write into (default: the repo)")
@@ -942,6 +993,10 @@ def main() -> int:
         return self_test()
 
     keys: list[str] = []
+    if args.langs:
+        keys.extend([k.strip() for k in args.langs.split(",") if k.strip()])
+    if args.lang:
+        keys.extend(args.lang)
     if args.all:
         for lang in LANGUAGES:
             if lang["key"] in {"no", "en", "es"}:
@@ -953,12 +1008,14 @@ def main() -> int:
             print("No translation folders found under", DEFAULT_LANG_CHUNKS)
             print("Expected e.g. /workspace/ml-traducir/pt/chunk-01.md")
             return 0
-    elif args.lang:
-        keys = [args.lang]
-    else:
-        parser.error("pass --lang, --all or --self-test")
+    if not keys and not args.self_test:
+        parser.error("pass --lang, --langs, --all or --self-test")
+    # de-duplicate, keep order
+    seen: set[str] = set()
+    keys = [k for k in keys if not (k in seen or seen.add(k))]
 
     overall_ok = True
+    built = detect_built(args.out_dir) | set(keys)
     for lang_key in keys:
         try:
             by_key(lang_key)
@@ -973,13 +1030,9 @@ def main() -> int:
             print(exc)
             overall_ok = False
             continue
-        built = detect_built(args.out_dir)
         warn = build_language(lang_key, trans, built, args.out_dir, args.dry_run)
-        if not args.skip_js and args.out_dir == ROOT:
+        if not args.skip_js and args.out_dir.resolve() == ROOT.resolve():
             update_site_js(lang_key, trans, args.dry_run, warn)
-        if not args.skip_sitemap and args.out_dir == ROOT:
-            update_sitemap(lang_key, args.dry_run)
-            update_existing_hreflang(lang_key, args.dry_run)
         if warn:
             print(f"{len(warn)} warnings:")
             for w in warn:
@@ -988,6 +1041,10 @@ def main() -> int:
         if (args.out_dir / by_key(lang_key)["path"] / "blog").exists():
             print("ERROR: blog language folder was created; removing is required. Blogs must not be translated.")
             overall_ok = False
+    if keys and not args.skip_sitemap and args.out_dir.resolve() == ROOT.resolve():
+        refresh_sitemap(built, args.dry_run)
+        for lang_key in keys:
+            update_existing_hreflang(lang_key, args.dry_run)
     return 0 if overall_ok else 1
 
 

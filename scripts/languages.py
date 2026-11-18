@@ -198,35 +198,42 @@ FLAG_FR = _svg(
     '<rect x="10.67" width="5.33" height="12" fill="#ED2939"/>'
 )
 
+FLAG_IT = _svg(
+    '<rect width="5.33" height="12" fill="#009246"/>'
+    '<rect x="5.33" width="5.34" height="12" fill="#fff"/>'
+    '<rect x="10.67" width="5.33" height="12" fill="#CE2B37"/>'
+)
+
 # Dropdown order. path is the URL prefix (no leading language folder for Norwegian).
 # code is the visible label in the toggle/menu.
 # key is the stable language id used in folders, pageLang(), and translation dirs.
 LANGUAGES = [
     {"key": "no", "code": "NO", "path": "", "hreflang": "no", "html_lang": "no", "dir": "ltr", "name": "Norsk", "aria": "Språk: Norsk", "og_locale": "nb_NO", "flag": FLAG_NO, "full": True},
-    {"key": "en", "code": "EN", "path": "en", "hreflang": "en", "html_lang": "en", "dir": "ltr", "name": "English", "aria": "Language: English", "og_locale": "en_GB", "flag": FLAG_EN, "full": True},
-    {"key": "es", "code": "ES", "path": "es", "hreflang": "es", "html_lang": "es", "dir": "ltr", "name": "Español", "aria": "Idioma: Español", "og_locale": "es_ES", "flag": FLAG_ES, "full": True},
-    {"key": "qu", "code": "QU", "path": "qu", "hreflang": "qu", "html_lang": "qu", "dir": "ltr", "name": "Runasimi", "aria": "Simi: Runasimi", "og_locale": "es_PE", "flag": FLAG_PE, "full": False},
-    {"key": "da", "code": "DA", "path": "da", "hreflang": "da", "html_lang": "da", "dir": "ltr", "name": "Dansk", "aria": "Sprog: Dansk", "og_locale": "da_DK", "flag": FLAG_DA, "full": False},
-    {"key": "de", "code": "DE", "path": "de", "hreflang": "de", "html_lang": "de", "dir": "ltr", "name": "Deutsch", "aria": "Sprache: Deutsch", "og_locale": "de_DE", "flag": FLAG_DE, "full": False},
-    {"key": "nl", "code": "NL", "path": "nl", "hreflang": "nl", "html_lang": "nl", "dir": "ltr", "name": "Nederlands", "aria": "Taal: Nederlands", "og_locale": "nl_NL", "flag": FLAG_NL, "full": False},
-    {"key": "sv", "code": "SV", "path": "sv", "hreflang": "sv", "html_lang": "sv", "dir": "ltr", "name": "Svenska", "aria": "Språk: Svenska", "og_locale": "sv_SE", "flag": FLAG_SV, "full": False},
+    {"key": "sv", "code": "SV", "path": "sv", "hreflang": "sv", "html_lang": "sv", "dir": "ltr", "name": "Svenska", "aria": "Språk: Svenska", "og_locale": "sv_SE", "flag": FLAG_SV, "full": True},
+    {"key": "da", "code": "DA", "path": "da", "hreflang": "da", "html_lang": "da", "dir": "ltr", "name": "Dansk", "aria": "Sprog: Dansk", "og_locale": "da_DK", "flag": FLAG_DA, "full": True},
     {"key": "fi", "code": "FI", "path": "fi", "hreflang": "fi", "html_lang": "fi", "dir": "ltr", "name": "Suomi", "aria": "Language: Suomi", "og_locale": "fi_FI", "flag": FLAG_FI, "full": False},
     {"key": "is", "code": "IS", "path": "is", "hreflang": "is", "html_lang": "is", "dir": "ltr", "name": "Íslenska", "aria": "Language: Íslenska", "og_locale": "is_IS", "flag": FLAG_IS, "full": False},
-    {"key": "pt", "code": "PT", "path": "pt", "hreflang": "pt", "html_lang": "pt", "dir": "ltr", "name": "Português", "aria": "Language: Português", "og_locale": "pt_PT", "flag": FLAG_PT, "full": False},
-    {"key": "fr", "code": "FR", "path": "fr", "hreflang": "fr", "html_lang": "fr", "dir": "ltr", "name": "Français", "aria": "Language: Français", "og_locale": "fr_FR", "flag": FLAG_FR, "full": False},
-    {"key": "zh", "code": "ZH", "path": "zh", "hreflang": "zh-Hans", "html_lang": "zh-Hans", "dir": "ltr", "name": "简体中文", "aria": "Language: 简体中文", "og_locale": "zh_CN", "flag": FLAG_CN, "full": False},
-    {"key": "zh-tw", "code": "ZH-TW", "path": "zh-tw", "hreflang": "zh-Hant", "html_lang": "zh-Hant", "dir": "ltr", "name": "繁體中文", "aria": "Language: 繁體中文", "og_locale": "zh_TW", "flag": FLAG_TW, "full": False},
-    {"key": "ja", "code": "JA", "path": "ja", "hreflang": "ja", "html_lang": "ja", "dir": "ltr", "name": "日本語", "aria": "Language: 日本語", "og_locale": "ja_JP", "flag": FLAG_JP, "full": False},
-    {"key": "vi", "code": "VI", "path": "vi", "hreflang": "vi", "html_lang": "vi", "dir": "ltr", "name": "Tiếng Việt", "aria": "Language: Tiếng Việt", "og_locale": "vi_VN", "flag": FLAG_VN, "full": False},
-    {"key": "hi", "code": "HI", "path": "hi", "hreflang": "hi", "html_lang": "hi", "dir": "ltr", "name": "हिन्दी", "aria": "Language: हिन्दी", "og_locale": "hi_IN", "flag": FLAG_IN, "full": False},
+    {"key": "en", "code": "EN", "path": "en", "hreflang": "en", "html_lang": "en", "dir": "ltr", "name": "English", "aria": "Language: English", "og_locale": "en_GB", "flag": FLAG_EN, "full": True},
+    {"key": "es", "code": "ES", "path": "es", "hreflang": "es", "html_lang": "es", "dir": "ltr", "name": "Español", "aria": "Idioma: Español", "og_locale": "es_ES", "flag": FLAG_ES, "full": True},
+    {"key": "fr", "code": "FR", "path": "fr", "hreflang": "fr", "html_lang": "fr", "dir": "ltr", "name": "Français", "aria": "Language: Français", "og_locale": "fr_FR", "flag": FLAG_FR, "full": True},
+    {"key": "it", "code": "IT", "path": "it", "hreflang": "it", "html_lang": "it", "dir": "ltr", "name": "Italiano", "aria": "Language: Italiano", "og_locale": "it_IT", "flag": FLAG_IT, "full": False},
+    {"key": "de", "code": "DE", "path": "de", "hreflang": "de", "html_lang": "de", "dir": "ltr", "name": "Deutsch", "aria": "Sprache: Deutsch", "og_locale": "de_DE", "flag": FLAG_DE, "full": True},
+    {"key": "nl", "code": "NL", "path": "nl", "hreflang": "nl", "html_lang": "nl", "dir": "ltr", "name": "Nederlands", "aria": "Taal: Nederlands", "og_locale": "nl_NL", "flag": FLAG_NL, "full": True},
+    {"key": "pt", "code": "PT", "path": "pt", "hreflang": "pt", "html_lang": "pt", "dir": "ltr", "name": "Português", "aria": "Language: Português", "og_locale": "pt_PT", "flag": FLAG_PT, "full": True},
+    {"key": "qu", "code": "QU", "path": "qu", "hreflang": "qu", "html_lang": "qu", "dir": "ltr", "name": "Runasimi", "aria": "Simi: Runasimi", "og_locale": "es_PE", "flag": FLAG_PE, "full": True},
+    {"key": "zh", "code": "ZH", "path": "zh", "hreflang": "zh-Hans", "html_lang": "zh-Hans", "dir": "ltr", "name": "简体中文", "aria": "Language: 简体中文", "og_locale": "zh_CN", "flag": FLAG_CN, "full": True},
+    {"key": "ja", "code": "JA", "path": "ja", "hreflang": "ja", "html_lang": "ja", "dir": "ltr", "name": "日本語", "aria": "Language: 日本語", "og_locale": "ja_JP", "flag": FLAG_JP, "full": True},
     {"key": "ko", "code": "KO", "path": "ko", "hreflang": "ko", "html_lang": "ko", "dir": "ltr", "name": "한국어", "aria": "Language: 한국어", "og_locale": "ko_KR", "flag": FLAG_KR, "full": False},
+    {"key": "zh-tw", "code": "ZH-TW", "path": "zh-tw", "hreflang": "zh-Hant", "html_lang": "zh-Hant", "dir": "ltr", "name": "繁體中文", "aria": "Language: 繁體中文", "og_locale": "zh_TW", "flag": FLAG_TW, "full": True},
+    {"key": "vi", "code": "VI", "path": "vi", "hreflang": "vi", "html_lang": "vi", "dir": "ltr", "name": "Tiếng Việt", "aria": "Language: Tiếng Việt", "og_locale": "vi_VN", "flag": FLAG_VN, "full": True},
     {"key": "th", "code": "TH", "path": "th", "hreflang": "th", "html_lang": "th", "dir": "ltr", "name": "ไทย", "aria": "Language: ไทย", "og_locale": "th_TH", "flag": FLAG_TH, "full": False},
-    {"key": "ar", "code": "AR", "path": "ar", "hreflang": "ar", "html_lang": "ar", "dir": "rtl", "name": "العربية", "aria": "Language: العربية", "og_locale": "ar_AE", "flag": FLAG_AE, "full": False},
+    {"key": "hi", "code": "HI", "path": "hi", "hreflang": "hi", "html_lang": "hi", "dir": "ltr", "name": "हिन्दी", "aria": "Language: हिन्दी", "og_locale": "hi_IN", "flag": FLAG_IN, "full": False},
     {"key": "ms", "code": "MS", "path": "ms", "hreflang": "ms", "html_lang": "ms", "dir": "ltr", "name": "Bahasa Melayu", "aria": "Language: Bahasa Melayu", "og_locale": "ms_MY", "flag": FLAG_MY, "full": False},
+    {"key": "ar", "code": "AR", "path": "ar", "hreflang": "ar", "html_lang": "ar", "dir": "rtl", "name": "العربية", "aria": "Language: العربية", "og_locale": "ar_AE", "flag": FLAG_AE, "full": False},
 ]
 
-# New placeholder languages added in this wave (after the original eight).
-NEW_KEYS = ["fi", "is", "pt", "fr", "zh", "zh-tw", "ja", "vi", "hi", "ko", "th", "ar", "ms"]
+NEW_KEYS = ["sv", "da", "fi", "is", "fr", "it", "de", "nl", "pt", "qu", "zh", "ja", "ko", "zh-tw", "vi", "th", "hi", "ms", "ar"]
+
 
 # Page groups for hreflang and sitemap. Blog is intentionally absent.
 # "out" is the slug under each new language folder.
