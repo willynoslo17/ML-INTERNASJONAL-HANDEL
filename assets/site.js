@@ -171,9 +171,15 @@
       policy: "Dasar Kuki",
       policyHref: "/ms/cookies/",
     },
+    ar: {
+      text: "نستخدم ملفات تعريف الارتباط التقنية الضرورية ونخزن أصل زيارتك (المصدر وصفحة الدخول) في المتصفح فقط لمعرفة مصدر جهات الاتصال من النموذج.",
+      accept: "قبول",
+      reject: "رفض",
+      policy: "سياسة ملفات تعريف الارتباط",
+      policyHref: "/ar/cookies/",
+    },
   };
 
-  COOKIE_COPY.ar = COOKIE_COPY.en;
 
   function ensureCookieBanner() {
     let banner = qs("#cookie-banner");
@@ -330,6 +336,11 @@
         sending: "Menghantar…",
         ok: "Terima kasih atas mesej anda. Kami akan menghubungi anda tidak lama lagi.",
         err: "Mesej tidak dapat dihantar. Sila cuba lagi atau tulis kepada kami di info@mlinternasjonal.no.",
+      },
+        ar: {
+        sending: "جارٍ الإرسال…",
+        ok: "شكرًا لرسالتك. سنعود إليك قريبًا.",
+        err: "تعذر إرسال الرسالة. يرجى المحاولة مرة أخرى أو الكتابة إلينا على info@mlinternasjonal.no.",
       },
     };
 

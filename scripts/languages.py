@@ -229,7 +229,7 @@ LANGUAGES = [
     {"key": "th", "code": "TH", "path": "th", "hreflang": "th", "html_lang": "th", "dir": "ltr", "name": "ไทย", "aria": "Language: ไทย", "og_locale": "th_TH", "flag": FLAG_TH, "full": True},
     {"key": "hi", "code": "HI", "path": "hi", "hreflang": "hi", "html_lang": "hi", "dir": "ltr", "name": "हिन्दी", "aria": "Language: हिन्दी", "og_locale": "hi_IN", "flag": FLAG_IN, "full": True},
     {"key": "ms", "code": "MS", "path": "ms", "hreflang": "ms", "html_lang": "ms", "dir": "ltr", "name": "Bahasa Melayu", "aria": "Language: Bahasa Melayu", "og_locale": "ms_MY", "flag": FLAG_MY, "full": True},
-    {"key": "ar", "code": "AR", "path": "ar", "hreflang": "ar", "html_lang": "ar", "dir": "rtl", "name": "العربية", "aria": "Language: العربية", "og_locale": "ar_AE", "flag": FLAG_AE, "full": False},
+    {"key": "ar", "code": "AR", "path": "ar", "hreflang": "ar", "html_lang": "ar", "dir": "rtl", "name": "العربية", "aria": "Language: العربية", "og_locale": "ar_AE", "flag": FLAG_AE, "full": True},
 ]
 
 NEW_KEYS = ["sv", "da", "fi", "is", "fr", "it", "de", "nl", "pt", "qu", "zh", "ja", "ko", "zh-tw", "vi", "th", "hi", "ms", "ar"]
