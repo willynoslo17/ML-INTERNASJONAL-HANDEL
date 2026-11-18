@@ -55,12 +55,13 @@ export async function onRequestPost(context) {
     const lang = String(body.lang || "no").trim();
     const company = String(body.company || "").trim();
     const website = String(body.website || "").trim(); // honeypot
+    const interest = String(body.interest || "").trim();
 
     if (website) {
       return json({ ok: true }, 200, headers);
     }
 
-    if (!name || !email || !message) {
+    if (!name || !email || !message || !interest) {
       return json(
         { ok: false, error: "missing_fields", contactEmail: CONTACT_EMAIL },
         400,
@@ -75,8 +76,6 @@ export async function onRequestPost(context) {
         headers
       );
     }
-
-    const interest = String(body.interest || "").trim();
 
     const payload = {
       source: "mlinternasjonal.no",
@@ -125,4 +124,8 @@ export async function onRequestPost(context) {
 
 export async function onRequestGet() {
   return json({ ok: false, error: "method_not_allowed", contactEmail: CONTACT_EMAIL }, 405);
+}
+
+export async function onRequestHead() {
+  return new Response(null, { status: 204, headers: { "Cache-Control": "no-store", Allow: "POST, OPTIONS" } });
 }
