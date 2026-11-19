@@ -128,6 +128,8 @@ p { margin: 0 0 1em; }
   text-decoration: none;
   display: flex;
   align-items: center;
+  justify-self: start;
+  width: max-content;
   background: #fff;
   border-radius: 8px;
   padding: 0.28rem;
@@ -602,8 +604,10 @@ footer a:hover { color: var(--gold); }
   grid-template-columns: 1.6fr 1fr;
   gap: 2rem 2.5rem;
 }
-.footer-brand {
+.footer-brand,
+.footer-grid a.footer-brand {
   display: inline-flex;
+  width: max-content;
   background: #fff;
   border-radius: 8px;
   padding: 0.4rem;
