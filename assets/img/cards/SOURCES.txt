@@ -3,10 +3,10 @@ All images are used under a license that allows commercial use. No trademarks or
 
 Services
 - service-sourcing.webp — Pexels 2252584, fresh produce in crates
-- service-representation.webp — Pexels 3184465, handshake in a meeting
-- service-matching.webp — Pexels 3184338, business meeting
+- service-representation.webp — crop from Grok cajas-2 (warehouse boxes, logistics team)
+- service-matching.webp — crop from Grok mix-4 (handshake, mixed-nationality team)
 - service-trade-support.webp — Pexels 262353, container ship (no readable carrier marks)
-- service-business-development.webp — Pexels 3184360, team around a laptop
+- service-business-development.webp — crop from Grok mix-1 (mixed-nationality team meeting)
 
 Sectors
 - sector-agriculture.webp — Pexels 1595108, aerial combine harvester

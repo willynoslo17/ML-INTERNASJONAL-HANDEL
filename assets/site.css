@@ -623,6 +623,22 @@ footer a:hover { color: var(--gold); }
 }
 .footer-grid a,
 .footer-grid span { display: block; margin: 0.35rem 0; }
+.footer-org { white-space: nowrap; }
+.footer-company {
+  width: min(100% - 2.5rem, var(--max));
+  margin: 0 auto 1.2rem;
+}
+.footer-company strong {
+  display: block;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 0.55rem;
+}
+.footer-company span,
+.footer-company a { display: block; margin: 0.35rem 0; }
+@media (max-width: 560px) {
+  .footer-org { white-space: nowrap; }
+}
 .footer-grid .btn { display: inline-flex; margin-top: 0.8rem; }
 .footer-legal {
   width: min(100% - 2.5rem, var(--max));
